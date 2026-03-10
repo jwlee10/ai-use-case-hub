@@ -18,6 +18,7 @@ const STATUS_OPTIONS: UseCaseStatus[] = ["New", "Work in Progress", "Complete"];
 
 const AddUseCase = () => {
   const navigate = useNavigate();
+  const { submitUseCase } = useAppState();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
