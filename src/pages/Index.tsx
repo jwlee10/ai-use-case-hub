@@ -92,7 +92,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-foreground">
-        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-6">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-4">
           <div className="flex items-center gap-3">
             <SidebarTrigger className="text-primary-foreground hover:bg-primary-foreground/10">
               <Menu className="h-5 w-5" />
@@ -112,7 +112,7 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1280px] px-8 py-8 space-y-8">
+      <main className="mx-auto max-w-[1280px] px-8 py-5 space-y-5">
         {/* Filter Card */}
         <div className="rounded-lg border border-border bg-card p-5 space-y-4">
           <div className="flex flex-wrap items-end gap-4">
