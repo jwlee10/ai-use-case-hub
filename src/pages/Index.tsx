@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Search, List, LayoutGrid, Menu } from "lucide-react";
 import { useCases, type UseCaseStatus } from "@/data/useCases";
 import { getUserUseCases } from "@/data/userUseCases";
+import { useAppState } from "@/context/AppStateContext";
 import UseCaseTable from "@/components/UseCaseTable";
 import UseCaseCards from "@/components/UseCaseCards";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
@@ -13,7 +14,8 @@ const sortOptions = ["Most Recent", "Most Viewed", "Most Liked", "A-Z"] as const
 
 const Index = () => {
   const navigate = useNavigate();
-  const allUseCases = useMemo(() => [...useCases, ...getUserUseCases()], []);
+  const { likedIds, toggleLike, myUseCases } = useAppState();
+  const allUseCases = useMemo(() => [...useCases, ...getUserUseCases()], [myUseCases]);
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTools, setAiTools] = useState<string[]>([]);
@@ -21,16 +23,6 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
-  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
-
-  const toggleLike = (id: string) => {
-    setLikedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
 
   const allJobFamilyOptions = useMemo(
     () => [...new Set(allUseCases.flatMap((u) => u.jobFamilies))],

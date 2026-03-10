@@ -5,8 +5,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { AppStateProvider } from "@/context/AppStateContext";
 import Index from "./pages/Index.tsx";
 import AddUseCase from "./pages/AddUseCase.tsx";
+import LikedUseCases from "./pages/LikedUseCases.tsx";
+import MyUseCases from "./pages/MyUseCases.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -17,19 +20,22 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SidebarProvider defaultOpen={false}>
-          <div className="min-h-screen flex w-full">
-            <AppSidebar />
-            <div className="flex-1 flex flex-col">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/add" element={<AddUseCase />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+        <AppStateProvider>
+          <SidebarProvider defaultOpen={false}>
+            <div className="min-h-screen flex w-full">
+              <AppSidebar />
+              <div className="flex-1 flex flex-col">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/add" element={<AddUseCase />} />
+                  <Route path="/liked" element={<LikedUseCases />} />
+                  <Route path="/my-use-cases" element={<MyUseCases />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
             </div>
-          </div>
-        </SidebarProvider>
+          </SidebarProvider>
+        </AppStateProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

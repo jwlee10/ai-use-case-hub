@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Upload, X } from "lucide-react";
 import { UseCaseStatus } from "@/data/useCases";
-import { addUserUseCase, UserUseCase } from "@/data/userUseCases";
+import { UserUseCase } from "@/data/userUseCases";
+import { useAppState } from "@/context/AppStateContext";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
 
 const JOB_FAMILY_OPTIONS = [
@@ -17,6 +18,7 @@ const STATUS_OPTIONS: UseCaseStatus[] = ["New", "Work in Progress", "Complete"];
 
 const AddUseCase = () => {
   const navigate = useNavigate();
+  const { submitUseCase } = useAppState();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -73,7 +75,7 @@ const AddUseCase = () => {
       attachments: attachments.map((f) => f.name),
     };
 
-    addUserUseCase(newUseCase);
+    submitUseCase(newUseCase);
     navigate("/");
   };
 
