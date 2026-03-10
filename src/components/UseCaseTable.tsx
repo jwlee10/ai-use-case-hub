@@ -13,7 +13,7 @@ const UseCaseTable = ({ data, starredIds, onToggleStar }: UseCaseTableProps) => 
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-border">
-            {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "VIEWS", "AI TOOL USED"].map(
+            {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "VIEWS", "STARS", "AI TOOL USED"].map(
               (col) => (
                 <th
                   key={col || "star"}
@@ -70,6 +70,12 @@ const UseCaseTable = ({ data, starredIds, onToggleStar }: UseCaseTableProps) => 
                 <span className="inline-flex items-center gap-1 text-muted-foreground font-ui text-xs">
                   <Eye className="h-3.5 w-3.5" />
                   {uc.views}
+                </span>
+              </td>
+              <td className="px-4 py-3">
+                <span className="inline-flex items-center gap-1 text-muted-foreground font-ui text-xs">
+                  <Star className="h-3.5 w-3.5" />
+                  {uc.stars}
                 </span>
               </td>
               <td className="px-4 py-3 font-ui text-xs text-muted-foreground">
