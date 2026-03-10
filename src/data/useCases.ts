@@ -22,7 +22,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["GPM", "Process"],
     impact: "Shortens analysis cycles for repeated reporting.",
     views: 342,
-    stars: 47,
+    likes: 47,
     aiToolUsed: "Copilot",
     status: "Complete",
     rating: 4,
