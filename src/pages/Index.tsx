@@ -33,16 +33,16 @@ const Index = () => {
   };
 
   const allJobFamilyOptions = useMemo(
-    () => [...new Set(useCases.flatMap((u) => u.jobFamilies))],
-    []
+    () => [...new Set(allUseCases.flatMap((u) => u.jobFamilies))],
+    [allUseCases]
   );
   const allTools = useMemo(
-    () => ["All", ...new Set(useCases.map((u) => u.aiToolUsed))],
-    []
+    () => ["All", ...new Set(allUseCases.map((u) => u.aiToolUsed))],
+    [allUseCases]
   );
 
   const filtered = useMemo(() => {
-    return useCases.filter((uc) => {
+    return allUseCases.filter((uc) => {
       if (activeTab !== "All" && uc.status !== activeTab) return false;
       const q = search.toLowerCase();
       if (
