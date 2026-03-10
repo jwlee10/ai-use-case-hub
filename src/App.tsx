@@ -31,6 +31,7 @@ const App = () => (
                   <Route path="/add" element={<AddUseCase />} />
                   <Route path="/liked" element={<LikedUseCases />} />
                   <Route path="/my-use-cases" element={<MyUseCases />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
