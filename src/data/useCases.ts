@@ -7,7 +7,7 @@ export interface UseCase {
   jobFamilies: string[];
   impact: string;
   views: number;
-  stars: number;
+  likes: number;
   aiToolUsed: string;
   status: UseCaseStatus;
   rating: number;
