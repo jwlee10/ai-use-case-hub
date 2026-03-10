@@ -27,7 +27,7 @@ const Index = () => {
 
   const filtered = useMemo(() => {
     return useCases.filter((uc) => {
-      if (uc.status !== activeTab) return false;
+      if (activeTab !== "All" && uc.status !== activeTab) return false;
       const q = search.toLowerCase();
       if (
         q &&
