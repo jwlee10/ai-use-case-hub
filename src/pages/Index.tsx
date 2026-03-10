@@ -16,7 +16,7 @@ const Index = () => {
   const allUseCases = useMemo(() => [...useCases, ...getUserUseCases()], []);
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
-  const [aiTool, setAiTool] = useState("All");
+  const [aiTools, setAiTools] = useState<string[]>([]);
   const [statusFilter, setStatusFilter] = useState("All");
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
