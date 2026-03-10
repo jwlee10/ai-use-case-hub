@@ -1,4 +1,4 @@
-import { Home, Star, Sparkles, Trophy } from "lucide-react";
+import { Home, ThumbsUp, Sparkles, Trophy } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import {
   Sidebar,
