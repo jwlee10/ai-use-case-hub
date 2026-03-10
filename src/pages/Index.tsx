@@ -4,7 +4,6 @@ import { useCases, type UseCaseStatus } from "@/data/useCases";
 import UseCaseTable from "@/components/UseCaseTable";
 import UseCaseCards from "@/components/UseCaseCards";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
-import UseCaseCards from "@/components/UseCaseCards";
 
 const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
 const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
