@@ -84,7 +84,7 @@ const Index = () => {
   const clearFilters = () => {
     setSearch("");
     setJobFamilies([]);
-    setAiTool("All");
+    setAiTools([]);
     setStatusFilter("All");
   };
 
