@@ -100,7 +100,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["Engineering"],
     impact: "Faster review cycles; consistent feedback quality.",
     views: 275,
-    stars: 41,
+    likes: 41,
     aiToolUsed: "Copilot",
     status: "Work in Progress",
     rating: 4,
