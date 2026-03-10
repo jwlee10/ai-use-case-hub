@@ -16,9 +16,22 @@ const UseCaseCards = ({ data, likedIds, onToggleLike }: UseCaseCardsProps) => {
           className="rounded-lg border border-border bg-card p-5 space-y-3 hover:shadow-md transition-shadow cursor-pointer"
         >
           <div className="flex items-start justify-between">
-            <h3 className="font-ui font-semibold text-foreground hover:text-primary transition-colors">
-              {uc.title}
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className="font-ui font-semibold text-foreground hover:text-primary transition-colors">
+                {uc.title}
+              </h3>
+              <span
+                className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-ui font-semibold ${
+                  uc.status === "Complete"
+                    ? "bg-primary/10 text-primary"
+                    : uc.status === "Work in Progress"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-secondary text-muted-foreground"
+                }`}
+              >
+                {uc.status}
+              </span>
+            </div>
             <button
               onClick={(e) => {
                 e.stopPropagation();
