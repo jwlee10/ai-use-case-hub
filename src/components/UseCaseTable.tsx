@@ -48,6 +48,19 @@ const UseCaseTable = ({ data, likedIds, onToggleLike }: UseCaseTableProps) => {
               <td className="px-4 py-3 font-ui font-semibold text-foreground group-hover:text-primary transition-colors whitespace-nowrap cursor-pointer">
                 {uc.title}
               </td>
+              <td className="px-4 py-3">
+                <span
+                  className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-ui font-semibold ${
+                    uc.status === "Complete"
+                      ? "bg-primary/10 text-primary"
+                      : uc.status === "Work in Progress"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : "bg-secondary text-muted-foreground"
+                  }`}
+                >
+                  {uc.status}
+                </span>
+              </td>
               <td className="px-4 py-3 text-muted-foreground max-w-[240px]">
                 {uc.description}
               </td>
