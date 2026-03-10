@@ -3,21 +3,22 @@ import { Search, List, LayoutGrid } from "lucide-react";
 import { useCases, type UseCaseStatus } from "@/data/useCases";
 import UseCaseTable from "@/components/UseCaseTable";
 import UseCaseCards from "@/components/UseCaseCards";
+import MultiSelectFilter from "@/components/MultiSelectFilter";
 
 const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
 const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
 
 const Index = () => {
   const [search, setSearch] = useState("");
-  const [jobFamily, setJobFamily] = useState("All");
+  const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTool, setAiTool] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
-  const allJobFamilies = useMemo(
-    () => ["All", ...new Set(useCases.flatMap((u) => u.jobFamilies))],
+  const allJobFamilyOptions = useMemo(
+    () => [...new Set(useCases.flatMap((u) => u.jobFamilies))],
     []
   );
   const allTools = useMemo(
@@ -36,13 +37,13 @@ const Index = () => {
         !uc.impact.toLowerCase().includes(q)
       )
         return false;
-      if (jobFamily !== "All" && !uc.jobFamilies.includes(jobFamily))
+      if (jobFamilies.length > 0 && !uc.jobFamilies.some((jf) => jobFamilies.includes(jf)))
         return false;
       if (aiTool !== "All" && uc.aiToolUsed !== aiTool) return false;
       if (statusFilter !== "All" && uc.status !== statusFilter) return false;
       return true;
     });
-  }, [search, jobFamily, aiTool, statusFilter, activeTab]);
+  }, [search, jobFamilies, aiTool, statusFilter, activeTab]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
@@ -66,7 +67,7 @@ const Index = () => {
 
   const clearFilters = () => {
     setSearch("");
-    setJobFamily("All");
+    setJobFamilies([]);
     setAiTool("All");
     setStatusFilter("All");
   };
@@ -110,11 +111,11 @@ const Index = () => {
               </div>
             </div>
 
-            <SelectFilter
+            <MultiSelectFilter
               label="JOB FAMILY"
-              value={jobFamily}
-              onChange={setJobFamily}
-              options={allJobFamilies}
+              selected={jobFamilies}
+              onChange={setJobFamilies}
+              options={allJobFamilyOptions}
             />
             <SelectFilter
               label="AI TOOL USED"
