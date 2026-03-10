@@ -126,7 +126,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["Marketing", "BD"],
     impact: "Stay informed without manual web trawling.",
     views: 31,
-    stars: 3,
+    likes: 3,
     aiToolUsed: "Copilot",
     status: "New",
     rating: 0,
