@@ -53,7 +53,7 @@ const MultiSelectFilter = ({ label, selected, onChange, options }: MultiSelectFi
         <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-md border border-border bg-card shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-50 mt-1 w-full rounded-md border border-foreground/20 bg-card shadow-lg max-h-60 overflow-auto">
           <button
             type="button"
             onClick={() => toggle("All")}
