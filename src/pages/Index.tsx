@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
-import { Search } from "lucide-react";
+import { Search, List, LayoutGrid } from "lucide-react";
 import { useCases, type UseCaseStatus } from "@/data/useCases";
 import UseCaseTable from "@/components/UseCaseTable";
+import UseCaseCards from "@/components/UseCaseCards";
 
-const statusTabs: UseCaseStatus[] = ["Complete", "Work in Progress", "New"];
+const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
 const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
 
 const Index = () => {
@@ -11,8 +12,9 @@ const Index = () => {
   const [jobFamily, setJobFamily] = useState("All");
   const [aiTool, setAiTool] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [activeTab, setActiveTab] = useState<UseCaseStatus>("Complete");
+  const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
+  const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
   const allJobFamilies = useMemo(
     () => ["All", ...new Set(useCases.flatMap((u) => u.jobFamilies))],
@@ -25,7 +27,7 @@ const Index = () => {
 
   const filtered = useMemo(() => {
     return useCases.filter((uc) => {
-      if (uc.status !== activeTab) return false;
+      if (activeTab !== "All" && uc.status !== activeTab) return false;
       const q = search.toLowerCase();
       if (
         q &&
@@ -53,7 +55,11 @@ const Index = () => {
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
     for (const s of statusTabs) {
-      map[s] = useCases.filter((u) => u.status === s).length;
+      if (s === "All") {
+        map[s] = useCases.length;
+      } else {
+        map[s] = useCases.filter((u) => u.status === s).length;
+      }
     }
     return map;
   }, []);
@@ -142,10 +148,10 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Section title + tabs */}
+        {/* Section title + tabs + view toggle */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h2 className="text-lg font-bold tracking-tight text-foreground">
-            Completed Use Cases
+            Use Cases
           </h2>
           <div className="flex items-center gap-6">
             <div className="flex gap-1">
@@ -181,11 +187,41 @@ const Index = () => {
                 ))}
               </select>
             </div>
+
+            {/* View toggle */}
+            <div className="flex rounded-md border border-border overflow-hidden">
+              <button
+                onClick={() => setViewMode("list")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 font-ui text-xs font-medium transition-colors ${
+                  viewMode === "list"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <List className="h-3.5 w-3.5" />
+                List
+              </button>
+              <button
+                onClick={() => setViewMode("cards")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 font-ui text-xs font-medium transition-colors ${
+                  viewMode === "cards"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+                Cards
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Table */}
-        <UseCaseTable data={sorted} />
+        {/* Table or Cards */}
+        {viewMode === "list" ? (
+          <UseCaseTable data={sorted} />
+        ) : (
+          <UseCaseCards data={sorted} />
+        )}
       </main>
     </div>
   );
