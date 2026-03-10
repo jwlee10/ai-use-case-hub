@@ -141,10 +141,10 @@ const Index = () => {
               onChange={setJobFamilies}
               options={allJobFamilyOptions}
             />
-            <SelectFilter
+            <MultiSelectFilter
               label="AI TOOL USED"
-              value={aiTool}
-              onChange={setAiTool}
+              selected={aiTools}
+              onChange={setAiTools}
               options={allTools}
             />
             <SelectFilter
