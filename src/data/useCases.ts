@@ -7,6 +7,7 @@ export interface UseCase {
   jobFamilies: string[];
   impact: string;
   views: number;
+  stars: number;
   aiToolUsed: string;
   status: UseCaseStatus;
   rating: number;
@@ -21,6 +22,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["GPM", "Process"],
     impact: "Shortens analysis cycles for repeated reporting.",
     views: 342,
+    stars: 47,
     aiToolUsed: "Copilot",
     status: "Complete",
     rating: 4,
@@ -33,6 +35,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["PSE", "Process", "Hardware"],
     impact: "Less time building checklists; improves completeness.",
     views: 218,
+    stars: 32,
     aiToolUsed: "ChatGPT",
     status: "Complete",
     rating: 4,
@@ -45,6 +48,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["BU Ops", "TPM", "Sales"],
     impact: "Reduce update prep time; fewer missed follow-ups.",
     views: 189,
+    stars: 25,
     aiToolUsed: "Copilot",
     status: "Complete",
     rating: 4,
@@ -57,6 +61,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["IT", "Support"],
     impact: "Save ~1+ hour per article; consistent formatting.",
     views: 156,
+    stars: 19,
     aiToolUsed: "ChatGPT",
     status: "Complete",
     rating: 4,
@@ -69,6 +74,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["All"],
     impact: "Cut meeting follow-up time by 50%.",
     views: 412,
+    stars: 58,
     aiToolUsed: "Copilot",
     status: "Work in Progress",
     rating: 3,
@@ -81,6 +87,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["Sales", "BD"],
     impact: "Faster first drafts; improved win rate.",
     views: 98,
+    stars: 11,
     aiToolUsed: "ChatGPT",
     status: "Work in Progress",
     rating: 3,
@@ -93,6 +100,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["Engineering"],
     impact: "Faster review cycles; consistent feedback quality.",
     views: 275,
+    stars: 41,
     aiToolUsed: "Copilot",
     status: "Work in Progress",
     rating: 4,
@@ -105,6 +113,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["HR", "IT"],
     impact: "Reduce HR ticket volume by 30%.",
     views: 64,
+    stars: 8,
     aiToolUsed: "ChatGPT",
     status: "Work in Progress",
     rating: 3,
@@ -117,6 +126,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["Marketing", "BD"],
     impact: "Stay informed without manual web trawling.",
     views: 31,
+    stars: 3,
     aiToolUsed: "Copilot",
     status: "New",
     rating: 0,
@@ -129,6 +139,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["Finance"],
     impact: "Reduce misclassification and audit time.",
     views: 12,
+    stars: 1,
     aiToolUsed: "ChatGPT",
     status: "New",
     rating: 0,
