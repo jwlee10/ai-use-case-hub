@@ -4,9 +4,10 @@ import { useCases, type UseCaseStatus } from "@/data/useCases";
 import UseCaseTable from "@/components/UseCaseTable";
 import UseCaseCards from "@/components/UseCaseCards";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
-const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
+const sortOptions = ["Most Recent", "Most Viewed", "Most Starred", "A-Z"] as const;
 
 const Index = () => {
   const [search, setSearch] = useState("");
@@ -16,6 +17,16 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
+  const [starredIds, setStarredIds] = useState<Set<string>>(new Set());
+
+  const toggleStar = (id: string) => {
+    setStarredIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   const allJobFamilyOptions = useMemo(
     () => [...new Set(useCases.flatMap((u) => u.jobFamilies))],
@@ -49,9 +60,14 @@ const Index = () => {
     const copy = [...filtered];
     if (sort === "Most Recent") copy.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     if (sort === "Most Viewed") copy.sort((a, b) => b.views - a.views);
+    if (sort === "Most Starred") copy.sort((a, b) => {
+      const aStarred = starredIds.has(a.id) ? 1 : 0;
+      const bStarred = starredIds.has(b.id) ? 1 : 0;
+      return bStarred - aStarred;
+    });
     if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
     return copy;
-  }, [filtered, sort]);
+  }, [filtered, sort, starredIds]);
 
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
@@ -77,13 +93,16 @@ const Index = () => {
       {/* Header */}
       <header className="border-b border-border bg-foreground">
         <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-6">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">
-              AI Use Case Library
-            </h1>
-            <p className="mt-1 text-sm text-primary-foreground/70 font-body">
-              Discover proven AI applications across job families—search, filter, and reuse.
-            </p>
+          <div className="flex items-center gap-3">
+            <SidebarTrigger className="text-primary-foreground hover:bg-primary-foreground/10" />
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">
+                AI Use Case Library
+              </h1>
+              <p className="mt-1 text-sm text-primary-foreground/70 font-body">
+                Discover proven AI applications across job families—search, filter, and reuse.
+              </p>
+            </div>
           </div>
           <button className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
             Add New Use Case
@@ -219,9 +238,9 @@ const Index = () => {
 
         {/* Table or Cards */}
         {viewMode === "list" ? (
-          <UseCaseTable data={sorted} />
+          <UseCaseTable data={sorted} starredIds={starredIds} onToggleStar={toggleStar} />
         ) : (
-          <UseCaseCards data={sorted} />
+          <UseCaseCards data={sorted} starredIds={starredIds} onToggleStar={toggleStar} />
         )}
       </main>
     </div>
