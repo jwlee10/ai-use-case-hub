@@ -54,7 +54,7 @@ const Index = () => {
         return false;
       if (jobFamilies.length > 0 && !uc.jobFamilies.some((jf) => jobFamilies.includes(jf)))
         return false;
-      if (aiTool !== "All" && uc.aiToolUsed !== aiTool) return false;
+      if (aiTools.length > 0 && !aiTools.includes(uc.aiToolUsed)) return false;
       if (statusFilter !== "All" && uc.status !== statusFilter) return false;
       return true;
     });
