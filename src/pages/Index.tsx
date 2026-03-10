@@ -148,10 +148,10 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Section title + tabs */}
+        {/* Section title + tabs + view toggle */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h2 className="text-lg font-bold tracking-tight text-foreground">
-            Completed Use Cases
+            Use Cases
           </h2>
           <div className="flex items-center gap-6">
             <div className="flex gap-1">
@@ -187,11 +187,41 @@ const Index = () => {
                 ))}
               </select>
             </div>
+
+            {/* View toggle */}
+            <div className="flex rounded-md border border-border overflow-hidden">
+              <button
+                onClick={() => setViewMode("list")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 font-ui text-xs font-medium transition-colors ${
+                  viewMode === "list"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <List className="h-3.5 w-3.5" />
+                List
+              </button>
+              <button
+                onClick={() => setViewMode("cards")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 font-ui text-xs font-medium transition-colors ${
+                  viewMode === "cards"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+                Cards
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Table */}
-        <UseCaseTable data={sorted} />
+        {/* Table or Cards */}
+        {viewMode === "list" ? (
+          <UseCaseTable data={sorted} />
+        ) : (
+          <UseCaseCards data={sorted} />
+        )}
       </main>
     </div>
   );
