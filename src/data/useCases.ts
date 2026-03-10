@@ -48,6 +48,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["BU Ops", "TPM", "Sales"],
     impact: "Reduce update prep time; fewer missed follow-ups.",
     views: 189,
+    stars: 25,
     aiToolUsed: "Copilot",
     status: "Complete",
     rating: 4,
