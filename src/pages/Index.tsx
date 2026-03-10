@@ -1,14 +1,223 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useMemo } from "react";
+import { Search } from "lucide-react";
+import { useCases, type UseCaseStatus } from "@/data/useCases";
+import UseCaseTable from "@/components/UseCaseTable";
+
+const statusTabs: UseCaseStatus[] = ["Complete", "Work in Progress", "New"];
+const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
 
 const Index = () => {
+  const [search, setSearch] = useState("");
+  const [jobFamily, setJobFamily] = useState("All");
+  const [aiTool, setAiTool] = useState("All");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [activeTab, setActiveTab] = useState<UseCaseStatus>("Complete");
+  const [sort, setSort] = useState<string>("Most Recent");
+
+  const allJobFamilies = useMemo(
+    () => ["All", ...new Set(useCases.flatMap((u) => u.jobFamilies))],
+    []
+  );
+  const allTools = useMemo(
+    () => ["All", ...new Set(useCases.map((u) => u.aiToolUsed))],
+    []
+  );
+
+  const filtered = useMemo(() => {
+    return useCases.filter((uc) => {
+      if (uc.status !== activeTab) return false;
+      const q = search.toLowerCase();
+      if (
+        q &&
+        !uc.title.toLowerCase().includes(q) &&
+        !uc.description.toLowerCase().includes(q) &&
+        !uc.impact.toLowerCase().includes(q)
+      )
+        return false;
+      if (jobFamily !== "All" && !uc.jobFamilies.includes(jobFamily))
+        return false;
+      if (aiTool !== "All" && uc.aiToolUsed !== aiTool) return false;
+      if (statusFilter !== "All" && uc.status !== statusFilter) return false;
+      return true;
+    });
+  }, [search, jobFamily, aiTool, statusFilter, activeTab]);
+
+  const sorted = useMemo(() => {
+    const copy = [...filtered];
+    if (sort === "Most Recent") copy.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    if (sort === "Most Viewed") copy.sort((a, b) => b.views - a.views);
+    if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
+    return copy;
+  }, [filtered, sort]);
+
+  const counts = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const s of statusTabs) {
+      map[s] = useCases.filter((u) => u.status === s).length;
+    }
+    return map;
+  }, []);
+
+  const clearFilters = () => {
+    setSearch("");
+    setJobFamily("All");
+    setAiTool("All");
+    setStatusFilter("All");
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b border-border bg-card">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-6">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              AI Use Case Library
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground font-body">
+              Discover proven AI applications across job families—search, filter, and reuse.
+            </p>
+          </div>
+          <button className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+            Add New Use Case
+          </button>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-[1280px] px-8 py-8 space-y-8">
+        {/* Filter Card */}
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4">
+          <div className="flex flex-wrap items-end gap-4">
+            {/* Search */}
+            <div className="flex-1 min-w-[240px]">
+              <label className="mb-1.5 block font-ui text-xs font-semibold tracking-wider text-muted-foreground">
+                SEARCH
+              </label>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search titles, descriptions, prompts, impact..."
+                  className="w-full rounded-md border border-input bg-background py-2 pl-9 pr-3 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                />
+              </div>
+            </div>
+
+            <SelectFilter
+              label="JOB FAMILY"
+              value={jobFamily}
+              onChange={setJobFamily}
+              options={allJobFamilies}
+            />
+            <SelectFilter
+              label="AI TOOL USED"
+              value={aiTool}
+              onChange={setAiTool}
+              options={allTools}
+            />
+            <SelectFilter
+              label="USE CASE STATUS"
+              value={statusFilter}
+              onChange={setStatusFilter}
+              options={["All", ...statusTabs]}
+            />
+          </div>
+
+          <div className="flex items-center justify-between border-t border-border pt-3">
+            <span className="font-ui text-xs text-muted-foreground">
+              Showing {sorted.length} use case{sorted.length !== 1 && "s"}
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={clearFilters}
+                className="rounded-md border border-border px-4 py-1.5 font-ui text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors"
+              >
+                Clear
+              </button>
+              <button className="rounded-md bg-foreground px-4 py-1.5 font-ui text-xs font-semibold text-card transition-opacity hover:opacity-90">
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Section title + tabs */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h2 className="text-lg font-bold tracking-tight text-foreground">
+            Completed Use Cases
+          </h2>
+          <div className="flex items-center gap-6">
+            <div className="flex gap-1">
+              {statusTabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`relative px-3 py-1.5 font-ui text-sm font-medium transition-colors ${
+                    activeTab === tab
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {tab} ({counts[tab]})
+                  {activeTab === tab && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="font-ui text-xs font-semibold tracking-wider text-muted-foreground">
+                SORT
+              </span>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+                className="rounded-md border border-input bg-background px-3 py-1.5 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {sortOptions.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Table */}
+        <UseCaseTable data={sorted} />
+      </main>
     </div>
   );
 };
+
+function SelectFilter({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+}) {
+  return (
+    <div className="min-w-[160px]">
+      <label className="mb-1.5 block font-ui text-xs font-semibold tracking-wider text-muted-foreground">
+        {label}
+      </label>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        {options.map((o) => (
+          <option key={o}>{o}</option>
+        ))}
+      </select>
+    </div>
+  );
+}
 
 export default Index;

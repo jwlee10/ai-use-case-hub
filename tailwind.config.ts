@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        heading: ['Manrope', 'system-ui', 'sans-serif'],
+        body: ['Source Serif 4', 'Georgia', 'serif'],
+        ui: ['Manrope', 'system-ui', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

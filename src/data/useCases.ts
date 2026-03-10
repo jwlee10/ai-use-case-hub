@@ -1,0 +1,137 @@
+export type UseCaseStatus = "Complete" | "Work in Progress" | "New";
+
+export interface UseCase {
+  id: string;
+  title: string;
+  description: string;
+  jobFamilies: string[];
+  impact: string;
+  views: number;
+  aiToolUsed: string;
+  status: UseCaseStatus;
+  rating: number;
+  createdAt: string;
+}
+
+export const useCases: UseCase[] = [
+  {
+    id: "1",
+    title: "JMP Plot Builder Helper",
+    description: "Generate and troubleshoot JMP scripting for common plots and filters.",
+    jobFamilies: ["GPM", "Process"],
+    impact: "Shortens analysis cycles for repeated reporting.",
+    views: 342,
+    aiToolUsed: "Copilot",
+    status: "Complete",
+    rating: 4,
+    createdAt: "2025-12-01",
+  },
+  {
+    id: "2",
+    title: "Safety Checklist Assistant",
+    description: "Turn procedure text into a step-by-step safety checklist and audit questions.",
+    jobFamilies: ["PSE", "Process", "Hardware"],
+    impact: "Less time building checklists; improves completeness.",
+    views: 218,
+    aiToolUsed: "ChatGPT",
+    status: "Complete",
+    rating: 4,
+    createdAt: "2025-11-15",
+  },
+  {
+    id: "3",
+    title: "Part Delay Notification Automation",
+    description: "Summarize delayed parts and generate stakeholder updates with next steps.",
+    jobFamilies: ["BU Ops", "TPM", "Sales"],
+    impact: "Reduce update prep time; fewer missed follow-ups.",
+    views: 189,
+    aiToolUsed: "Copilot",
+    status: "Complete",
+    rating: 4,
+    createdAt: "2025-10-20",
+  },
+  {
+    id: "4",
+    title: "Knowledge Article Generator",
+    description: "Generate structured knowledge articles from support ticket resolutions.",
+    jobFamilies: ["IT", "Support"],
+    impact: "Save ~1+ hour per article; consistent formatting.",
+    views: 156,
+    aiToolUsed: "ChatGPT",
+    status: "Complete",
+    rating: 4,
+    createdAt: "2025-09-10",
+  },
+  {
+    id: "5",
+    title: "Meeting Notes Summarizer",
+    description: "Automatically summarize meeting transcripts into action items and key decisions.",
+    jobFamilies: ["All"],
+    impact: "Cut meeting follow-up time by 50%.",
+    views: 412,
+    aiToolUsed: "Copilot",
+    status: "Work in Progress",
+    rating: 3,
+    createdAt: "2026-01-05",
+  },
+  {
+    id: "6",
+    title: "RFP Response Drafter",
+    description: "Draft initial RFP responses using historical winning proposals.",
+    jobFamilies: ["Sales", "BD"],
+    impact: "Faster first drafts; improved win rate.",
+    views: 98,
+    aiToolUsed: "ChatGPT",
+    status: "Work in Progress",
+    rating: 3,
+    createdAt: "2026-01-20",
+  },
+  {
+    id: "7",
+    title: "Code Review Assistant",
+    description: "Provide automated code review suggestions and best-practice checks.",
+    jobFamilies: ["Engineering"],
+    impact: "Faster review cycles; consistent feedback quality.",
+    views: 275,
+    aiToolUsed: "Copilot",
+    status: "Work in Progress",
+    rating: 4,
+    createdAt: "2026-02-01",
+  },
+  {
+    id: "8",
+    title: "Onboarding FAQ Bot",
+    description: "Answer common new-hire questions using internal documentation.",
+    jobFamilies: ["HR", "IT"],
+    impact: "Reduce HR ticket volume by 30%.",
+    views: 64,
+    aiToolUsed: "ChatGPT",
+    status: "Work in Progress",
+    rating: 3,
+    createdAt: "2026-02-15",
+  },
+  {
+    id: "9",
+    title: "Competitive Intel Tracker",
+    description: "Monitor and summarize competitor announcements from public sources.",
+    jobFamilies: ["Marketing", "BD"],
+    impact: "Stay informed without manual web trawling.",
+    views: 31,
+    aiToolUsed: "Copilot",
+    status: "New",
+    rating: 0,
+    createdAt: "2026-03-01",
+  },
+  {
+    id: "10",
+    title: "Expense Report Classifier",
+    description: "Auto-categorize expense line items based on description and vendor.",
+    jobFamilies: ["Finance"],
+    impact: "Reduce misclassification and audit time.",
+    views: 12,
+    aiToolUsed: "ChatGPT",
+    status: "New",
+    rating: 0,
+    createdAt: "2026-03-05",
+  },
+];
