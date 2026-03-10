@@ -38,7 +38,7 @@ const Index = () => {
         !uc.impact.toLowerCase().includes(q)
       )
         return false;
-      if (jobFamily !== "All" && !uc.jobFamilies.includes(jobFamily))
+      if (jobFamilies.length > 0 && !uc.jobFamilies.some((jf) => jobFamilies.includes(jf)))
         return false;
       if (aiTool !== "All" && uc.aiToolUsed !== aiTool) return false;
       if (statusFilter !== "All" && uc.status !== statusFilter) return false;
