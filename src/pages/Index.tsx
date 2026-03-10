@@ -37,7 +37,7 @@ const Index = () => {
     [allUseCases]
   );
   const allTools = useMemo(
-    () => ["All", ...new Set(allUseCases.map((u) => u.aiToolUsed))],
+    () => [...new Set(allUseCases.map((u) => u.aiToolUsed))],
     [allUseCases]
   );
 
