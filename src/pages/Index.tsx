@@ -74,7 +74,7 @@ const Index = () => {
             <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">
               AI Use Case Library
             </h1>
-            <p className="mt-1 text-sm text-muted-foreground font-body">
+            <p className="mt-1 text-sm text-primary-foreground/70 font-body">
               Discover proven AI applications across job families—search, filter, and reuse.
             </p>
           </div>
