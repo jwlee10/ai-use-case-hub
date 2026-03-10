@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Search, List, LayoutGrid } from "lucide-react";
+import { Search, List, LayoutGrid, Menu } from "lucide-react";
 import { useCases, type UseCaseStatus } from "@/data/useCases";
 import UseCaseTable from "@/components/UseCaseTable";
 import UseCaseCards from "@/components/UseCaseCards";
