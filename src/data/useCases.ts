@@ -35,7 +35,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["PSE", "Process", "Hardware"],
     impact: "Less time building checklists; improves completeness.",
     views: 218,
-    stars: 32,
+    likes: 32,
     aiToolUsed: "ChatGPT",
     status: "Complete",
     rating: 4,
