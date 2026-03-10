@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, List, LayoutGrid, Menu } from "lucide-react";
 import { useCases, type UseCaseStatus } from "@/data/useCases";
+import { getUserUseCases } from "@/data/userUseCases";
 import UseCaseTable from "@/components/UseCaseTable";
 import UseCaseCards from "@/components/UseCaseCards";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
@@ -10,6 +12,8 @@ const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progr
 const sortOptions = ["Most Recent", "Most Viewed", "Most Liked", "A-Z"] as const;
 
 const Index = () => {
+  const navigate = useNavigate();
+  const allUseCases = useMemo(() => [...useCases, ...getUserUseCases()], []);
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTool, setAiTool] = useState("All");
@@ -29,16 +33,16 @@ const Index = () => {
   };
 
   const allJobFamilyOptions = useMemo(
-    () => [...new Set(useCases.flatMap((u) => u.jobFamilies))],
-    []
+    () => [...new Set(allUseCases.flatMap((u) => u.jobFamilies))],
+    [allUseCases]
   );
   const allTools = useMemo(
-    () => ["All", ...new Set(useCases.map((u) => u.aiToolUsed))],
-    []
+    () => ["All", ...new Set(allUseCases.map((u) => u.aiToolUsed))],
+    [allUseCases]
   );
 
   const filtered = useMemo(() => {
-    return useCases.filter((uc) => {
+    return allUseCases.filter((uc) => {
       if (activeTab !== "All" && uc.status !== activeTab) return false;
       const q = search.toLowerCase();
       if (
@@ -69,9 +73,9 @@ const Index = () => {
     const map: Record<string, number> = {};
     for (const s of statusTabs) {
       if (s === "All") {
-        map[s] = useCases.length;
+        map[s] = allUseCases.length;
       } else {
-        map[s] = useCases.filter((u) => u.status === s).length;
+        map[s] = allUseCases.filter((u) => u.status === s).length;
       }
     }
     return map;
@@ -102,7 +106,10 @@ const Index = () => {
               </p>
             </div>
           </div>
-          <button className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <button
+            onClick={() => navigate("/add")}
+            className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          >
             Add New Use Case
           </button>
         </div>
