@@ -10,6 +10,7 @@ import Index from "./pages/Index.tsx";
 import AddUseCase from "./pages/AddUseCase.tsx";
 import LikedUseCases from "./pages/LikedUseCases.tsx";
 import MyUseCases from "./pages/MyUseCases.tsx";
+import Leaderboard from "./pages/Leaderboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
