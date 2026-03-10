@@ -18,8 +18,8 @@ const Index = () => {
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
-  const allJobFamilies = useMemo(
-    () => ["All", ...new Set(useCases.flatMap((u) => u.jobFamilies))],
+  const allJobFamilyOptions = useMemo(
+    () => [...new Set(useCases.flatMap((u) => u.jobFamilies))],
     []
   );
   const allTools = useMemo(
