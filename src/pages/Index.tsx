@@ -16,7 +16,7 @@ const Index = () => {
   const allUseCases = useMemo(() => [...useCases, ...getUserUseCases()], []);
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
-  const [aiTool, setAiTool] = useState("All");
+  const [aiTools, setAiTools] = useState<string[]>([]);
   const [statusFilter, setStatusFilter] = useState("All");
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
@@ -37,7 +37,7 @@ const Index = () => {
     [allUseCases]
   );
   const allTools = useMemo(
-    () => ["All", ...new Set(allUseCases.map((u) => u.aiToolUsed))],
+    () => [...new Set(allUseCases.map((u) => u.aiToolUsed))],
     [allUseCases]
   );
 
@@ -54,11 +54,11 @@ const Index = () => {
         return false;
       if (jobFamilies.length > 0 && !uc.jobFamilies.some((jf) => jobFamilies.includes(jf)))
         return false;
-      if (aiTool !== "All" && uc.aiToolUsed !== aiTool) return false;
+      if (aiTools.length > 0 && !aiTools.includes(uc.aiToolUsed)) return false;
       if (statusFilter !== "All" && uc.status !== statusFilter) return false;
       return true;
     });
-  }, [search, jobFamilies, aiTool, statusFilter, activeTab]);
+  }, [search, jobFamilies, aiTools, statusFilter, activeTab]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
@@ -84,7 +84,7 @@ const Index = () => {
   const clearFilters = () => {
     setSearch("");
     setJobFamilies([]);
-    setAiTool("All");
+    setAiTools([]);
     setStatusFilter("All");
   };
 
@@ -141,10 +141,10 @@ const Index = () => {
               onChange={setJobFamilies}
               options={allJobFamilyOptions}
             />
-            <SelectFilter
+            <MultiSelectFilter
               label="AI TOOL USED"
-              value={aiTool}
-              onChange={setAiTool}
+              selected={aiTools}
+              onChange={setAiTools}
               options={allTools}
             />
             <SelectFilter
