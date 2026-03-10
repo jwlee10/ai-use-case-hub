@@ -92,7 +92,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-foreground">
-        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-3 py-4">
           <div className="flex items-center gap-3">
             <SidebarTrigger className="text-primary-foreground hover:bg-primary-foreground/10">
               <Menu className="h-5 w-5" />
