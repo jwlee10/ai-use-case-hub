@@ -63,7 +63,7 @@ const Index = () => {
     if (sort === "Most Liked") copy.sort((a, b) => b.likes - a.likes);
     if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
     return copy;
-  }, [filtered, sort, starredIds]);
+  }, [filtered, sort, likedIds]);
 
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
