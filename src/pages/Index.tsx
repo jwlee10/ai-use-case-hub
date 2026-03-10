@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
-import { Search } from "lucide-react";
+import { Search, List, LayoutGrid } from "lucide-react";
 import { useCases, type UseCaseStatus } from "@/data/useCases";
 import UseCaseTable from "@/components/UseCaseTable";
+import UseCaseCards from "@/components/UseCaseCards";
 
-const statusTabs: UseCaseStatus[] = ["Complete", "Work in Progress", "New"];
+const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
 const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
 
 const Index = () => {
@@ -11,8 +12,9 @@ const Index = () => {
   const [jobFamily, setJobFamily] = useState("All");
   const [aiTool, setAiTool] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [activeTab, setActiveTab] = useState<UseCaseStatus>("Complete");
+  const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
+  const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
   const allJobFamilies = useMemo(
     () => ["All", ...new Set(useCases.flatMap((u) => u.jobFamilies))],
