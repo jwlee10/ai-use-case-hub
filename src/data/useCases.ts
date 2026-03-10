@@ -74,7 +74,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["All"],
     impact: "Cut meeting follow-up time by 50%.",
     views: 412,
-    stars: 58,
+    likes: 58,
     aiToolUsed: "Copilot",
     status: "Work in Progress",
     rating: 3,
