@@ -236,9 +236,9 @@ const Index = () => {
 
         {/* Table or Cards */}
         {viewMode === "list" ? (
-          <UseCaseTable data={sorted} starredIds={starredIds} onToggleStar={toggleStar} />
+          <UseCaseTable data={sorted} likedIds={likedIds} onToggleLike={toggleLike} />
         ) : (
-          <UseCaseCards data={sorted} starredIds={starredIds} onToggleStar={toggleStar} />
+          <UseCaseCards data={sorted} likedIds={likedIds} onToggleLike={toggleLike} />
         )}
       </main>
     </div>

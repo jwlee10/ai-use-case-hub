@@ -1,22 +1,22 @@
-import { Eye, Star } from "lucide-react";
+import { Eye, ThumbsUp } from "lucide-react";
 import type { UseCase } from "@/data/useCases";
 
 interface UseCaseTableProps {
   data: UseCase[];
-  starredIds: Set<string>;
-  onToggleStar: (id: string) => void;
+  likedIds: Set<string>;
+  onToggleLike: (id: string) => void;
 }
 
-const UseCaseTable = ({ data, starredIds, onToggleStar }: UseCaseTableProps) => {
+const UseCaseTable = ({ data, likedIds, onToggleLike }: UseCaseTableProps) => {
   return (
     <div className="rounded-lg border border-border bg-card overflow-hidden">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-border">
-            {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "VIEWS", "STARS", "AI TOOL USED"].map(
+            {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "VIEWS", "LIKES", "AI TOOL USED"].map(
               (col) => (
                 <th
-                  key={col || "star"}
+                  key={col || "like"}
                   className="px-4 py-3 text-left font-ui text-xs font-semibold tracking-wider text-muted-foreground"
                 >
                   {col}
@@ -33,12 +33,12 @@ const UseCaseTable = ({ data, starredIds, onToggleStar }: UseCaseTableProps) => 
             >
               <td className="px-4 py-3">
                 <button
-                  onClick={() => onToggleStar(uc.id)}
+                  onClick={() => onToggleLike(uc.id)}
                   className="transition-colors hover:scale-110"
                 >
-                  <Star
+                  <ThumbsUp
                     className={`h-4 w-4 ${
-                      starredIds.has(uc.id)
+                      likedIds.has(uc.id)
                         ? "fill-primary text-primary"
                         : "text-muted-foreground hover:text-primary"
                     }`}
@@ -74,8 +74,8 @@ const UseCaseTable = ({ data, starredIds, onToggleStar }: UseCaseTableProps) => 
               </td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center gap-1 text-muted-foreground font-ui text-xs">
-                  <Star className="h-3.5 w-3.5" />
-                  {uc.stars}
+                  <ThumbsUp className="h-3.5 w-3.5" />
+                  {uc.likes}
                 </span>
               </td>
               <td className="px-4 py-3 font-ui text-xs text-muted-foreground">
