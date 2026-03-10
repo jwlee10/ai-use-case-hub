@@ -68,10 +68,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card">
+      <header className="border-b border-border bg-foreground">
         <div className="mx-auto flex max-w-[1280px] items-center justify-between px-8 py-6">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">
               AI Use Case Library
             </h1>
             <p className="mt-1 text-sm text-muted-foreground font-body">
