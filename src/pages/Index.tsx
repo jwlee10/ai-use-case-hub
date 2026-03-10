@@ -73,9 +73,9 @@ const Index = () => {
     const map: Record<string, number> = {};
     for (const s of statusTabs) {
       if (s === "All") {
-        map[s] = useCases.length;
+        map[s] = allUseCases.length;
       } else {
-        map[s] = useCases.filter((u) => u.status === s).length;
+        map[s] = allUseCases.filter((u) => u.status === s).length;
       }
     }
     return map;
