@@ -10,6 +10,7 @@ import Index from "./pages/Index.tsx";
 import AddUseCase from "./pages/AddUseCase.tsx";
 import LikedUseCases from "./pages/LikedUseCases.tsx";
 import MyUseCases from "./pages/MyUseCases.tsx";
+import Leaderboard from "./pages/Leaderboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
                   <Route path="/add" element={<AddUseCase />} />
                   <Route path="/liked" element={<LikedUseCases />} />
                   <Route path="/my-use-cases" element={<MyUseCases />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
