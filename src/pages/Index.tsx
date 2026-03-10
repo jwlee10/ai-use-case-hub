@@ -106,7 +106,10 @@ const Index = () => {
               </p>
             </div>
           </div>
-          <button className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <button
+            onClick={() => navigate("/add")}
+            className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          >
             Add New Use Case
           </button>
         </div>
