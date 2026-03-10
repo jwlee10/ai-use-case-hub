@@ -112,7 +112,7 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1280px] px-8 py-5 space-y-5">
+      <main className="mx-auto max-w-[1280px] px-5 py-5 space-y-5">
         {/* Filter Card */}
         <div className="rounded-lg border border-border bg-card p-5 space-y-4">
           <div className="flex flex-wrap items-end gap-4">
