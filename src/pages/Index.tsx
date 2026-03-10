@@ -7,7 +7,7 @@ import MultiSelectFilter from "@/components/MultiSelectFilter";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
-const sortOptions = ["Most Recent", "Most Viewed", "Most Starred", "A-Z"] as const;
+const sortOptions = ["Most Recent", "Most Viewed", "Most Liked", "A-Z"] as const;
 
 const Index = () => {
   const [search, setSearch] = useState("");
@@ -17,10 +17,10 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
-  const [starredIds, setStarredIds] = useState<Set<string>>(new Set());
+  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
 
-  const toggleStar = (id: string) => {
-    setStarredIds((prev) => {
+  const toggleLike = (id: string) => {
+    setLikedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
@@ -60,10 +60,10 @@ const Index = () => {
     const copy = [...filtered];
     if (sort === "Most Recent") copy.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     if (sort === "Most Viewed") copy.sort((a, b) => b.views - a.views);
-    if (sort === "Most Starred") copy.sort((a, b) => b.stars - a.stars);
+    if (sort === "Most Liked") copy.sort((a, b) => b.likes - a.likes);
     if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
     return copy;
-  }, [filtered, sort, starredIds]);
+  }, [filtered, sort, likedIds]);
 
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
@@ -236,9 +236,9 @@ const Index = () => {
 
         {/* Table or Cards */}
         {viewMode === "list" ? (
-          <UseCaseTable data={sorted} starredIds={starredIds} onToggleStar={toggleStar} />
+          <UseCaseTable data={sorted} likedIds={likedIds} onToggleLike={toggleLike} />
         ) : (
-          <UseCaseCards data={sorted} starredIds={starredIds} onToggleStar={toggleStar} />
+          <UseCaseCards data={sorted} likedIds={likedIds} onToggleLike={toggleLike} />
         )}
       </main>
     </div>

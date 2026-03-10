@@ -1,13 +1,13 @@
-import { Eye, Star } from "lucide-react";
+import { Eye, ThumbsUp } from "lucide-react";
 import type { UseCase } from "@/data/useCases";
 
 interface UseCaseCardsProps {
   data: UseCase[];
-  starredIds: Set<string>;
-  onToggleStar: (id: string) => void;
+  likedIds: Set<string>;
+  onToggleLike: (id: string) => void;
 }
 
-const UseCaseCards = ({ data, starredIds, onToggleStar }: UseCaseCardsProps) => {
+const UseCaseCards = ({ data, likedIds, onToggleLike }: UseCaseCardsProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {data.map((uc) => (
@@ -22,13 +22,13 @@ const UseCaseCards = ({ data, starredIds, onToggleStar }: UseCaseCardsProps) => 
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onToggleStar(uc.id);
+                onToggleLike(uc.id);
               }}
               className="ml-2 shrink-0 transition-colors hover:scale-110"
             >
-              <Star
+              <ThumbsUp
                 className={`h-4 w-4 ${
-                  starredIds.has(uc.id)
+                  likedIds.has(uc.id)
                     ? "fill-primary text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
