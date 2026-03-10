@@ -112,11 +112,11 @@ const Index = () => {
               </div>
             </div>
 
-            <SelectFilter
+            <MultiSelectFilter
               label="JOB FAMILY"
-              value={jobFamily}
-              onChange={setJobFamily}
-              options={allJobFamilies}
+              selected={jobFamilies}
+              onChange={setJobFamilies}
+              options={allJobFamilyOptions}
             />
             <SelectFilter
               label="AI TOOL USED"
