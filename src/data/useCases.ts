@@ -61,7 +61,7 @@ export const useCases: UseCase[] = [
     jobFamilies: ["IT", "Support"],
     impact: "Save ~1+ hour per article; consistent formatting.",
     views: 156,
-    stars: 19,
+    likes: 19,
     aiToolUsed: "ChatGPT",
     status: "Complete",
     rating: 4,
