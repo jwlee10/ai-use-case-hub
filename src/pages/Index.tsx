@@ -12,6 +12,8 @@ const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progr
 const sortOptions = ["Most Recent", "Most Viewed", "Most Liked", "A-Z"] as const;
 
 const Index = () => {
+  const navigate = useNavigate();
+  const allUseCases = useMemo(() => [...useCases, ...getUserUseCases()], []);
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTool, setAiTool] = useState("All");
