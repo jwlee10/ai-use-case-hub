@@ -146,7 +146,7 @@ const Index = () => {
               label="USE CASE STATUS"
               value={statusFilter}
               onChange={setStatusFilter}
-              options={["All", ...statusTabs]}
+              options={["All", "Complete", "Work in Progress", "New"]}
             />
           </div>
 
