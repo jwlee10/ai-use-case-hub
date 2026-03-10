@@ -55,7 +55,11 @@ const Index = () => {
   const counts = useMemo(() => {
     const map: Record<string, number> = {};
     for (const s of statusTabs) {
-      map[s] = useCases.filter((u) => u.status === s).length;
+      if (s === "All") {
+        map[s] = useCases.length;
+      } else {
+        map[s] = useCases.filter((u) => u.status === s).length;
+      }
     }
     return map;
   }, []);
