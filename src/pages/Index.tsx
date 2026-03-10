@@ -17,10 +17,10 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
-  const [starredIds, setStarredIds] = useState<Set<string>>(new Set());
+  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
 
-  const toggleStar = (id: string) => {
-    setStarredIds((prev) => {
+  const toggleLike = (id: string) => {
+    setLikedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
