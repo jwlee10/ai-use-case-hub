@@ -174,7 +174,7 @@ const Index = () => {
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="rounded-md border border-input bg-background px-3 py-1.5 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-md border border-foreground/20 bg-card px-3 py-1.5 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               >
                 {sortOptions.map((o) => (
                   <option key={o}>{o}</option>
@@ -210,7 +210,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        className="w-full rounded-md border border-foreground/20 bg-card px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
       >
         {options.map((o) => (
           <option key={o}>{o}</option>
