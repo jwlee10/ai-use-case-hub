@@ -74,7 +74,7 @@ const AddUseCase = () => {
       attachments: attachments.map((f) => f.name),
     };
 
-    addUserUseCase(newUseCase);
+    submitUseCase(newUseCase);
     navigate("/");
   };
 
