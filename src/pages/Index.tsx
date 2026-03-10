@@ -11,7 +11,7 @@ const sortOptions = ["Most Recent", "Most Viewed", "A-Z"] as const;
 
 const Index = () => {
   const [search, setSearch] = useState("");
-  const [jobFamily, setJobFamily] = useState("All");
+  const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTool, setAiTool] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
   const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
