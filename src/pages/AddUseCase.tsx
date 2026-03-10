@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Upload, X } from "lucide-react";
 import { UseCaseStatus } from "@/data/useCases";
-import { addUserUseCase, UserUseCase } from "@/data/userUseCases";
+import { UserUseCase } from "@/data/userUseCases";
+import { useAppState } from "@/context/AppStateContext";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
 
 const JOB_FAMILY_OPTIONS = [
