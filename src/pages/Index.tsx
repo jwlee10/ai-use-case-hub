@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, List, LayoutGrid, Menu } from "lucide-react";
-import { useCases, type UseCaseStatus } from "@/data/useCases";
+import { useCases } from "@/data/useCases";
 import { getUserUseCases } from "@/data/userUseCases";
 import { useAppState } from "@/context/AppStateContext";
 import UseCaseTable from "@/components/UseCaseTable";
