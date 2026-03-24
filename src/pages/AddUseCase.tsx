@@ -44,6 +44,8 @@ const AddUseCase = () => {
     if (finalProduct.length === 0) e.finalProduct = "Required";
     if (!aiMethod) e.aiMethod = "Required";
     if (!impact.trim()) e.impact = "Required";
+    if (!asIsTime.trim()) e.asIsTime = "Required";
+    if (!withAiTime.trim()) e.withAiTime = "Required";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -209,7 +211,7 @@ const AddUseCase = () => {
           {/* As Is */}
           <div>
             <label className="mb-1 block font-ui text-sm font-semibold text-foreground">
-              As Is
+              As Is <span className="text-destructive">*</span>
             </label>
             <p className="mb-2 text-xs text-muted-foreground">
               How long does this task take as-is, without AI-enablement?
@@ -233,12 +235,13 @@ const AddUseCase = () => {
                 ))}
               </select>
             </div>
+            {errors.asIsTime && <p className="mt-1 text-xs text-destructive">{errors.asIsTime}</p>}
           </div>
 
           {/* With AI */}
           <div>
             <label className="mb-1 block font-ui text-sm font-semibold text-foreground">
-              With AI
+              With AI <span className="text-destructive">*</span>
             </label>
             <p className="mb-2 text-xs text-muted-foreground">
               How long does this task take now, with AI-enablement?
@@ -262,6 +265,7 @@ const AddUseCase = () => {
                 ))}
               </select>
             </div>
+            {errors.withAiTime && <p className="mt-1 text-xs text-destructive">{errors.withAiTime}</p>}
           </div>
 
           {/* Impact description */}
