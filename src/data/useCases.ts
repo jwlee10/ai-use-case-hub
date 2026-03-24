@@ -50,6 +50,7 @@ export const useCases: UseCase[] = [
     description: "Summarize delayed parts and generate stakeholder updates with next steps.",
     jobFamilies: ["BU Ops", "TPM", "Sales"],
     impact: "Reduce update prep time; fewer missed follow-ups.",
+    timeSavedPerUse: "30 min",
     views: 189,
     likes: 25,
     aiToolUsed: "Copilot",
