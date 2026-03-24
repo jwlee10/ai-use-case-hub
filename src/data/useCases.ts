@@ -78,6 +78,7 @@ export const useCases: UseCase[] = [
     description: "Automatically summarize meeting transcripts into action items and key decisions.",
     jobFamilies: ["All"],
     impact: "Cut meeting follow-up time by 50%.",
+    timeSavedPerUse: "20 min",
     views: 412,
     likes: 58,
     aiToolUsed: "Copilot",
