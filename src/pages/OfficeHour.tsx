@@ -207,9 +207,10 @@ const OfficeHour = () => {
               </label>
               <label className="flex cursor-pointer items-center gap-2 rounded-md border border-dashed border-input bg-background px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-foreground">
                 <Upload className="h-4 w-4" />
-                {attachment ? attachment.name : "Click to upload a screenshot or file"}
+                {attachment ? attachment.name : "Click to upload a screenshot image"}
                 <input
                   type="file"
+                  accept="image/png,image/jpeg,image/gif,image/webp"
                   className="hidden"
                   onChange={(e) => setAttachment(e.target.files?.[0] || null)}
                 />
