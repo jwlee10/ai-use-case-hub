@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Upload, X } from "lucide-react";
-import { UseCaseStatus } from "@/data/useCases";
 import { UserUseCase } from "@/data/userUseCases";
 import { useAppState } from "@/context/AppStateContext";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
@@ -14,7 +13,7 @@ const JOB_FAMILY_OPTIONS = [
 const AI_TOOLS = ["Copilot Web", "Copilot License", "Claude Code", "OneLXM", "Github Copilot"];
 const FINAL_PRODUCTS = ["Script", "Workflow", "Prompt(s)"];
 const AI_METHODS = ["Single prompt", "Vibe Coding", "Iterative prompting", "Copilot feature (no-prompt)"];
-const STATUS_OPTIONS: UseCaseStatus[] = ["New", "Work in Progress", "Complete"];
+const TIME_UNITS = ["seconds", "minutes", "hours"];
 
 const AddUseCase = () => {
   const navigate = useNavigate();
@@ -23,31 +22,28 @@ const AddUseCase = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
-  const [status, setStatus] = useState<UseCaseStatus | "">("");
   const [aiToolsUsed, setAiToolsUsed] = useState<string[]>([]);
   const [finalProduct, setFinalProduct] = useState<string[]>([]);
   const [aiMethod, setAiMethod] = useState("");
+  const [asIsTime, setAsIsTime] = useState("");
+  const [asIsUnit, setAsIsUnit] = useState("minutes");
+  const [withAiTime, setWithAiTime] = useState("");
+  const [withAiUnit, setWithAiUnit] = useState("minutes");
   const [impact, setImpact] = useState("");
   const [prompt, setPrompt] = useState("");
   const [microlearningLink, setMicrolearningLink] = useState("");
   const [attachments, setAttachments] = useState<File[]>([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const isComplete = status === "Complete";
-  const isDisabled = status === "New" || status === "Work in Progress" || status === "";
-
   const validate = () => {
     const e: Record<string, string> = {};
     if (!title.trim()) e.title = "Required";
     if (!description.trim()) e.description = "Required";
     if (jobFamilies.length === 0) e.jobFamilies = "Required";
-    if (!status) e.status = "Required";
-    if (isComplete) {
-      if (aiToolsUsed.length === 0) e.aiToolsUsed = "Required";
-      if (finalProduct.length === 0) e.finalProduct = "Required";
-      if (!aiMethod) e.aiMethod = "Required";
-      if (!impact.trim()) e.impact = "Required";
-    }
+    if (aiToolsUsed.length === 0) e.aiToolsUsed = "Required";
+    if (finalProduct.length === 0) e.finalProduct = "Required";
+    if (!aiMethod) e.aiMethod = "Required";
+    if (!impact.trim()) e.impact = "Required";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -64,7 +60,7 @@ const AddUseCase = () => {
       views: 0,
       likes: 0,
       aiToolUsed: aiToolsUsed[0] || "",
-      status: status as UseCaseStatus,
+      status: "Complete",
       rating: 0,
       createdAt: new Date().toISOString().split("T")[0],
       aiToolsUsed,
@@ -88,9 +84,6 @@ const AddUseCase = () => {
   const removeAttachment = (index: number) => {
     setAttachments((prev) => prev.filter((_, i) => i !== index));
   };
-
-  const sectionClasses = (disabled: boolean) =>
-    `rounded-lg border border-border bg-card p-6 space-y-4 transition-opacity ${disabled ? "opacity-40 pointer-events-none" : ""}`;
 
   return (
     <div className="min-h-screen bg-background">
@@ -156,37 +149,16 @@ const AddUseCase = () => {
             />
             {errors.jobFamilies && <p className="mt-1 text-xs text-destructive">{errors.jobFamilies}</p>}
           </div>
-
-          {/* Status */}
-          <div>
-            <label className="mb-1.5 block font-ui text-sm font-semibold text-foreground">
-              Use Case Status <span className="text-destructive">*</span>
-            </label>
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value as UseCaseStatus)}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-            >
-              <option value="">Select status...</option>
-              {STATUS_OPTIONS.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
-            {errors.status && <p className="mt-1 text-xs text-destructive">{errors.status}</p>}
-          </div>
         </section>
 
         {/* Section 2: How the Use Case was Created */}
-        <section className={sectionClasses(isDisabled)}>
+        <section className="rounded-lg border border-border bg-card p-6 space-y-4">
           <h2 className="text-lg font-bold tracking-tight text-foreground">How the Use Case was Created</h2>
-          {isDisabled && (
-            <p className="text-sm text-muted-foreground italic">Select "Complete" status to fill out this section.</p>
-          )}
 
           {/* AI Tools Used */}
           <div>
             <label className="mb-1.5 block font-ui text-sm font-semibold text-foreground">
-              AI Tools Used {isComplete && <span className="text-destructive">*</span>}
+              AI Tools Used <span className="text-destructive">*</span>
             </label>
             <MultiSelectFilter
               label=""
@@ -200,7 +172,7 @@ const AddUseCase = () => {
           {/* Final Product */}
           <div>
             <label className="mb-1.5 block font-ui text-sm font-semibold text-foreground">
-              What is the Final Product? {isComplete && <span className="text-destructive">*</span>}
+              What is the Final Product? <span className="text-destructive">*</span>
             </label>
             <MultiSelectFilter
               label=""
@@ -214,7 +186,7 @@ const AddUseCase = () => {
           {/* AI Method */}
           <div>
             <label className="mb-1.5 block font-ui text-sm font-semibold text-foreground">
-              How was AI Primarily Used to Create the Solution? {isComplete && <span className="text-destructive">*</span>}
+              How was AI Primarily Used to Create the Solution? <span className="text-destructive">*</span>
             </label>
             <select
               value={aiMethod}
@@ -231,12 +203,72 @@ const AddUseCase = () => {
         </section>
 
         {/* Section 3: Impact */}
-        <section className={sectionClasses(isDisabled)}>
+        <section className="rounded-lg border border-border bg-card p-6 space-y-4">
           <h2 className="text-lg font-bold tracking-tight text-foreground">Impact</h2>
-          {isDisabled && (
-            <p className="text-sm text-muted-foreground italic">Select "Complete" status to fill out this section.</p>
-          )}
+
+          {/* As Is */}
           <div>
+            <label className="mb-1 block font-ui text-sm font-semibold text-foreground">
+              As Is
+            </label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              How long does this task take as-is, without AI-enablement?
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="number"
+                min="0"
+                value={asIsTime}
+                onChange={(e) => setAsIsTime(e.target.value)}
+                placeholder="e.g. 30"
+                className="w-32 rounded-md border border-input bg-background px-3 py-2 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              <select
+                value={asIsUnit}
+                onChange={(e) => setAsIsUnit(e.target.value)}
+                className="rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {TIME_UNITS.map((u) => (
+                  <option key={u} value={u}>{u}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* With AI */}
+          <div>
+            <label className="mb-1 block font-ui text-sm font-semibold text-foreground">
+              With AI
+            </label>
+            <p className="mb-2 text-xs text-muted-foreground">
+              How long does this task take now, with AI-enablement?
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="number"
+                min="0"
+                value={withAiTime}
+                onChange={(e) => setWithAiTime(e.target.value)}
+                placeholder="e.g. 5"
+                className="w-32 rounded-md border border-input bg-background px-3 py-2 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              <select
+                value={withAiUnit}
+                onChange={(e) => setWithAiUnit(e.target.value)}
+                className="rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {TIME_UNITS.map((u) => (
+                  <option key={u} value={u}>{u}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Impact description */}
+          <div>
+            <label className="mb-1.5 block font-ui text-sm font-semibold text-foreground">
+              Describe the Impact <span className="text-destructive">*</span>
+            </label>
             <textarea
               value={impact}
               onChange={(e) => setImpact(e.target.value)}
@@ -249,11 +281,8 @@ const AddUseCase = () => {
         </section>
 
         {/* Section 4: Artifacts */}
-        <section className={sectionClasses(isDisabled)}>
+        <section className="rounded-lg border border-border bg-card p-6 space-y-4">
           <h2 className="text-lg font-bold tracking-tight text-foreground">Artifacts</h2>
-          {isDisabled && (
-            <p className="text-sm text-muted-foreground italic">Select "Complete" status to fill out this section.</p>
-          )}
 
           {/* Prompt */}
           <div>
