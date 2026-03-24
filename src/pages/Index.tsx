@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, List, LayoutGrid, Menu } from "lucide-react";
-import { useCases, type UseCaseStatus } from "@/data/useCases";
+import { useCases } from "@/data/useCases";
 import { getUserUseCases } from "@/data/userUseCases";
 import { useAppState } from "@/context/AppStateContext";
 import UseCaseTable from "@/components/UseCaseTable";
@@ -9,7 +9,6 @@ import UseCaseCards from "@/components/UseCaseCards";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
 const sortOptions = ["Most Recent", "Most Viewed", "Most Liked", "A-Z"] as const;
 
 const Index = () => {
@@ -20,7 +19,6 @@ const Index = () => {
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTools, setAiTools] = useState<string[]>([]);
   const [statusFilter, setStatusFilter] = useState("All");
-  const [activeTab, setActiveTab] = useState<UseCaseStatus | "All">("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
@@ -35,7 +33,6 @@ const Index = () => {
 
   const filtered = useMemo(() => {
     return allUseCases.filter((uc) => {
-      if (activeTab !== "All" && uc.status !== activeTab) return false;
       const q = search.toLowerCase();
       if (
         q &&
@@ -50,7 +47,7 @@ const Index = () => {
       if (statusFilter !== "All" && uc.status !== statusFilter) return false;
       return true;
     });
-  }, [search, jobFamilies, aiTools, statusFilter, activeTab]);
+  }, [search, jobFamilies, aiTools, statusFilter]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
@@ -60,18 +57,6 @@ const Index = () => {
     if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
     return copy;
   }, [filtered, sort, likedIds]);
-
-  const counts = useMemo(() => {
-    const map: Record<string, number> = {};
-    for (const s of statusTabs) {
-      if (s === "All") {
-        map[s] = allUseCases.length;
-      } else {
-        map[s] = allUseCases.filter((u) => u.status === s).length;
-      }
-    }
-    return map;
-  }, []);
 
   const clearFilters = () => {
     setSearch("");
@@ -171,24 +156,6 @@ const Index = () => {
             Use Cases
           </h2>
           <div className="flex items-center gap-6">
-            <div className="flex gap-1">
-              {statusTabs.map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`relative px-3 py-1.5 font-ui text-sm font-medium transition-colors ${
-                    activeTab === tab
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {tab} ({counts[tab]})
-                  {activeTab === tab && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
-                  )}
-                </button>
-              ))}
-            </div>
 
             <div className="flex items-center gap-2">
               <span className="font-ui text-xs font-semibold tracking-wider text-muted-foreground">
