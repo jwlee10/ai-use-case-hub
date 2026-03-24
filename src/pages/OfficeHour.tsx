@@ -99,7 +99,7 @@ const OfficeHour = () => {
                 XLSX.utils.book_append_sheet(wb, ws, "Office Hour Questions");
                 XLSX.writeFile(wb, "office_hour_questions.xlsx");
               }}
-              className="rounded-lg border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 px-4 py-2.5 font-ui text-sm"
+              className="rounded-lg border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 px-4 py-2.5 font-ui text-sm"
             >
               <Download className="mr-1 h-4 w-4" />
               Export
