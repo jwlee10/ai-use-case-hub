@@ -9,9 +9,9 @@ import {
 
 const sections = [
   { label: "Use Case Library", url: "/", icon: Home, matchPaths: ["/", "/liked", "/my-use-cases", "/leaderboard", "/add"] },
-  { label: "Office Hour", url: "/office-hour", icon: MessageCircleQuestion, matchPaths: ["/office-hour"] },
   { label: "Event Calendar", url: "/event-calendar", icon: CalendarDays, matchPaths: ["/event-calendar"] },
   { label: "Newsletters", url: "/newsletter", icon: Newspaper, matchPaths: ["/newsletter"] },
+  { label: "Office Hour", url: "/office-hour", icon: MessageCircleQuestion, matchPaths: ["/office-hour"] },
   { label: "Learning Lab", url: "/learning-lab", icon: BookOpen, matchPaths: ["/learning-lab"] },
 ];
 
