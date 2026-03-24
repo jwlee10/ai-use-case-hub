@@ -106,6 +106,7 @@ export const useCases: UseCase[] = [
     description: "Provide automated code review suggestions and best-practice checks.",
     jobFamilies: ["Engineering"],
     impact: "Faster review cycles; consistent feedback quality.",
+    timeSavedPerUse: "35 min",
     views: 275,
     likes: 41,
     aiToolUsed: "Copilot",
