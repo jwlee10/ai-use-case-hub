@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { format, parseISO } from "date-fns";
-import { Menu, Plus, Upload, MessageSquare, Paperclip } from "lucide-react";
+import { Menu, Plus, Upload, MessageSquare, Paperclip, ChevronDown } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   getOfficeHourQuestions,
