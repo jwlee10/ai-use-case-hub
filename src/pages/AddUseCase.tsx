@@ -235,6 +235,7 @@ const AddUseCase = () => {
                 ))}
               </select>
             </div>
+            {errors.asIsTime && <p className="mt-1 text-xs text-destructive">{errors.asIsTime}</p>}
           </div>
 
           {/* With AI */}
