@@ -10,8 +10,8 @@ const JOB_FAMILY_OPTIONS = [
   "IT", "Support", "All", "BD", "Engineering", "HR", "Marketing", "Finance",
 ];
 
-const AI_TOOLS = ["Copilot Web", "Copilot License", "Claude Code", "OneLXM", "Github Copilot"];
-const FINAL_PRODUCTS = ["Script", "Workflow", "Prompt(s)"];
+const AI_TOOLS = ["Copilot Web", "Copilot License", "Claude Code", "OneLXM", "Github Copilot", "Copilot Studio", "Copilot Cowork"];
+const FINAL_PRODUCTS = ["Script", "Workflow", "Prompt(s)", "Agent"];
 const AI_METHODS = ["Single prompt", "Vibe Coding", "Iterative prompting", "Copilot feature (no-prompt)"];
 const TIME_UNITS = ["seconds", "minutes", "hours"];
 
