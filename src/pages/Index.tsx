@@ -18,7 +18,6 @@ const Index = () => {
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTools, setAiTools] = useState<string[]>([]);
-  const [statusFilter, setStatusFilter] = useState("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
