@@ -209,7 +209,7 @@ const AddUseCase = () => {
           {/* As Is */}
           <div>
             <label className="mb-1 block font-ui text-sm font-semibold text-foreground">
-              As Is
+              As Is <span className="text-destructive">*</span>
             </label>
             <p className="mb-2 text-xs text-muted-foreground">
               How long does this task take as-is, without AI-enablement?
