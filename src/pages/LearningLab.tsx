@@ -173,6 +173,39 @@ const LearningLab = () => {
           </div>
         </div>
 
+        {/* Upcoming Sessions */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-foreground">When is the next Learning Lab?</h2>
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <Plus className="h-3.5 w-3.5" />
+              Add Event
+            </Button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {[
+              { session: "Session 1: Core AI Concepts", date: "April 15, 2026", time: "10:00 AM – 12:00 PM PST", location: "Building 1, Room 302 & Virtual (Teams)" },
+              { session: "Session 2: AI-Assisted Coding", date: "April 22, 2026", time: "10:00 AM – 12:00 PM PST", location: "Building 1, Room 302 & Virtual (Teams)" },
+              { session: "Session 1: Core AI Concepts", date: "May 13, 2026", time: "1:00 PM – 3:00 PM PST", location: "Building 5, Training Center & Virtual (Teams)" },
+              { session: "Session 2: AI-Assisted Coding", date: "May 20, 2026", time: "1:00 PM – 3:00 PM PST", location: "Building 5, Training Center & Virtual (Teams)" },
+            ].map((event, i) => (
+              <Card key={i}>
+                <CardContent className="p-4 space-y-2">
+                  <p className="text-sm font-semibold text-foreground">{event.session}</p>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground font-body">
+                    <CalendarDays className="h-3.5 w-3.5 text-primary shrink-0" />
+                    {event.date} · {event.time}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground font-body">
+                    <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
+                    {event.location}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
         {/* Contact */}
         <Card className="border-border">
           <CardContent className="p-4 flex items-center gap-3">
