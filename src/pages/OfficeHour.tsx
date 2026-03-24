@@ -101,30 +101,37 @@ const OfficeHour = () => {
               </span>
             </h2>
             <div className="space-y-2">
-              {weekQuestions.map((q) => (
-                <div
-                  key={q.id}
-                  className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30"
-                >
-                  <p className="text-sm font-body text-foreground leading-relaxed">
-                    {q.question}
-                  </p>
-                  <div className="mt-2 flex items-center gap-4 text-xs text-muted-foreground font-ui">
-                    <span>Submitted by {q.submittedBy}</span>
-                    <span>•</span>
-                    <span>{format(parseISO(q.submittedAt), "MMM d, yyyy 'at' h:mm a")}</span>
-                    {q.attachmentName && (
-                      <>
-                        <span>•</span>
-                        <span className="flex items-center gap-1 text-primary">
-                          <Paperclip className="h-3 w-3" />
-                          {q.attachmentName}
-                        </span>
-                      </>
-                    )}
+              {weekQuestions.map((q) => {
+                const isExpanded = expandedId === q.id;
+                return (
+                  <div
+                    key={q.id}
+                    className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30 cursor-pointer"
+                    onClick={() => setExpandedId(isExpanded ? null : q.id)}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <p className={`text-sm font-body text-foreground leading-relaxed ${isExpanded ? "" : "line-clamp-2"}`}>
+                        {q.question}
+                      </p>
+                      <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 mt-0.5 ${isExpanded ? "rotate-180" : ""}`} />
+                    </div>
+                    <div className={`mt-2 flex items-center gap-4 text-xs text-muted-foreground font-ui ${isExpanded ? "" : ""}`}>
+                      <span>Submitted by {q.submittedBy}</span>
+                      <span>•</span>
+                      <span>{format(parseISO(q.submittedAt), "MMM d, yyyy 'at' h:mm a")}</span>
+                      {q.attachmentName && (
+                        <>
+                          <span>•</span>
+                          <span className="flex items-center gap-1 text-primary">
+                            <Paperclip className="h-3 w-3" />
+                            {q.attachmentName}
+                          </span>
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ))}
