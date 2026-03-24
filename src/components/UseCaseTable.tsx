@@ -18,7 +18,7 @@ const UseCaseTable = ({ data, likedIds, onToggleLike }: UseCaseTableProps) => {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">
-              {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "VIEWS", "LIKES", "AI TOOL USED"].map(
+              {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "TIME SAVED", "VIEWS", "LIKES", "AI TOOL USED"].map(
                 (col) => (
                   <th
                     key={col || "like"}
