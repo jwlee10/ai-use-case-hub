@@ -25,6 +25,7 @@ const AddUseCase = () => {
   const [aiToolsUsed, setAiToolsUsed] = useState<string[]>([]);
   const [finalProduct, setFinalProduct] = useState<string[]>([]);
   const [aiMethod, setAiMethod] = useState("");
+  const [aiMethodOther, setAiMethodOther] = useState("");
   const [asIsTime, setAsIsTime] = useState("");
   const [asIsUnit, setAsIsUnit] = useState("minutes");
   const [withAiTime, setWithAiTime] = useState("");
