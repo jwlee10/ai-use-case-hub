@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
-import { Menu, Plus, Upload, Calendar } from "lucide-react";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Plus, Upload, Calendar } from "lucide-react";
 import { getNewsletters, addNewsletter, type Newsletter as NL } from "@/data/newsletters";
 import {
   Dialog,
