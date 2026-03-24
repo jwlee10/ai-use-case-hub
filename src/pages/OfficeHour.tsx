@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react";
 import { format, parseISO } from "date-fns";
-import { Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock, Download } from "lucide-react";
+import { Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock, Download, MoreVertical, Pencil, Trash2 } from "lucide-react";
 import * as XLSX from "xlsx";
 import {
   getOfficeHourQuestions,
   addOfficeHourQuestion,
+  updateOfficeHourQuestion,
+  deleteOfficeHourQuestion,
   type OfficeHourQuestion,
 } from "@/data/officeHourQuestions";
 import {
@@ -16,11 +18,19 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const OfficeHour = () => {
   const [questions, setQuestions] = useState(getOfficeHourQuestions());
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState<OfficeHourQuestion | null>(null);
+  const [editingQuestion, setEditingQuestion] = useState<OfficeHourQuestion | null>(null);
+  const [editText, setEditText] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const [error, setError] = useState("");
@@ -61,6 +71,19 @@ const OfficeHour = () => {
     setAttachment(null);
     setError("");
     setDialogOpen(false);
+  };
+
+  const handleDelete = (id: string) => {
+    deleteOfficeHourQuestion(id);
+    setQuestions(getOfficeHourQuestions());
+  };
+
+  const handleEditSave = () => {
+    if (!editingQuestion || !editText.trim()) return;
+    updateOfficeHourQuestion(editingQuestion.id, { question: editText.trim() });
+    setQuestions(getOfficeHourQuestions());
+    setEditingQuestion(null);
+    setEditText("");
   };
 
   return (
@@ -123,26 +146,52 @@ const OfficeHour = () => {
               {weekQuestions.map((q) => (
                 <div
                   key={q.id}
-                  className="rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/30 cursor-pointer"
+                  className="group rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/30 cursor-pointer flex items-start gap-3"
                   onClick={() => setSelectedQuestion(q)}
                 >
-                  <p className="text-sm font-body text-foreground leading-relaxed line-clamp-2">
-                    {q.question}
-                  </p>
-                  <div className="mt-1.5 flex items-center gap-3 text-xs text-muted-foreground font-ui">
-                    <span>{q.submittedBy}</span>
-                    <span>•</span>
-                    <span>{format(parseISO(q.submittedAt), "MMM d 'at' h:mm a")}</span>
-                    {q.attachmentName && (
-                      <>
-                        <span>•</span>
-                        <span className="flex items-center gap-1 text-primary">
-                          <Paperclip className="h-3 w-3" />
-                          {q.attachmentName}
-                        </span>
-                      </>
-                    )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-body text-foreground leading-relaxed line-clamp-2">
+                      {q.question}
+                    </p>
+                    <div className="mt-1.5 flex items-center gap-3 text-xs text-muted-foreground font-ui">
+                      <span>{q.submittedBy}</span>
+                      <span>•</span>
+                      <span>{format(parseISO(q.submittedAt), "MMM d 'at' h:mm a")}</span>
+                      {q.attachmentName && (
+                        <>
+                          <span>•</span>
+                          <span className="flex items-center gap-1 text-primary">
+                            <Paperclip className="h-3 w-3" />
+                            {q.attachmentName}
+                          </span>
+                        </>
+                      )}
+                    </div>
                   </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                      <button className="shrink-0 rounded-md p-1 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted hover:text-foreground">
+                        <MoreVertical className="h-4 w-4" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingQuestion(q);
+                        setEditText(q.question);
+                      }}>
+                        <Pencil className="mr-2 h-3.5 w-3.5" />
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(q.id);
+                      }}>
+                        <Trash2 className="mr-2 h-3.5 w-3.5" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               ))}
             </div>
@@ -240,6 +289,27 @@ const OfficeHour = () => {
                 Cancel
               </Button>
               <Button onClick={handleSubmit}>Submit Question</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Question Dialog */}
+      <Dialog open={!!editingQuestion} onOpenChange={(open) => !open && setEditingQuestion(null)}>
+        <DialogContent className="sm:max-w-[520px]">
+          <DialogHeader>
+            <DialogTitle>Edit Question</DialogTitle>
+            <DialogDescription>Update your question below.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-2">
+            <Textarea
+              value={editText}
+              onChange={(e) => setEditText(e.target.value)}
+              rows={4}
+            />
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setEditingQuestion(null)}>Cancel</Button>
+              <Button onClick={handleEditSave}>Save</Button>
             </div>
           </div>
         </DialogContent>
