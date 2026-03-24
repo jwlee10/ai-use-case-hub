@@ -44,6 +44,7 @@ const AddUseCase = () => {
     if (aiToolsUsed.length === 0) e.aiToolsUsed = "Required";
     if (finalProduct.length === 0) e.finalProduct = "Required";
     if (!aiMethod) e.aiMethod = "Required";
+    if (aiMethod === "Other" && !aiMethodOther.trim()) e.aiMethod = "Please specify";
     if (!impact.trim()) e.impact = "Required";
     if (!asIsTime.trim()) e.asIsTime = "Required";
     if (!withAiTime.trim()) e.withAiTime = "Required";
