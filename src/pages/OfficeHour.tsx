@@ -146,26 +146,52 @@ const OfficeHour = () => {
               {weekQuestions.map((q) => (
                 <div
                   key={q.id}
-                  className="rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/30 cursor-pointer"
+                  className="group rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/30 cursor-pointer flex items-start gap-3"
                   onClick={() => setSelectedQuestion(q)}
                 >
-                  <p className="text-sm font-body text-foreground leading-relaxed line-clamp-2">
-                    {q.question}
-                  </p>
-                  <div className="mt-1.5 flex items-center gap-3 text-xs text-muted-foreground font-ui">
-                    <span>{q.submittedBy}</span>
-                    <span>•</span>
-                    <span>{format(parseISO(q.submittedAt), "MMM d 'at' h:mm a")}</span>
-                    {q.attachmentName && (
-                      <>
-                        <span>•</span>
-                        <span className="flex items-center gap-1 text-primary">
-                          <Paperclip className="h-3 w-3" />
-                          {q.attachmentName}
-                        </span>
-                      </>
-                    )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-body text-foreground leading-relaxed line-clamp-2">
+                      {q.question}
+                    </p>
+                    <div className="mt-1.5 flex items-center gap-3 text-xs text-muted-foreground font-ui">
+                      <span>{q.submittedBy}</span>
+                      <span>•</span>
+                      <span>{format(parseISO(q.submittedAt), "MMM d 'at' h:mm a")}</span>
+                      {q.attachmentName && (
+                        <>
+                          <span>•</span>
+                          <span className="flex items-center gap-1 text-primary">
+                            <Paperclip className="h-3 w-3" />
+                            {q.attachmentName}
+                          </span>
+                        </>
+                      )}
+                    </div>
                   </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                      <button className="shrink-0 rounded-md p-1 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted hover:text-foreground">
+                        <MoreVertical className="h-4 w-4" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingQuestion(q);
+                        setEditText(q.question);
+                      }}>
+                        <Pencil className="mr-2 h-3.5 w-3.5" />
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(q.id);
+                      }}>
+                        <Trash2 className="mr-2 h-3.5 w-3.5" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               ))}
             </div>
