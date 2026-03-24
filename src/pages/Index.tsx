@@ -60,7 +60,6 @@ const Index = () => {
     setSearch("");
     setJobFamilies([]);
     setAiTools([]);
-    setStatusFilter("All");
   };
 
   return (
