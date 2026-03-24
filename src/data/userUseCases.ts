@@ -37,6 +37,7 @@ let userUseCases: UserUseCase[] = [
     description: "Compile updates from multiple project trackers into a concise weekly status email.",
     jobFamilies: ["TPM", "BU Ops"],
     impact: "Cuts report prep from 45 min to 10 min per week.",
+    timeSavedPerUse: "35 min",
     views: 28,
     likes: 4,
     aiToolUsed: "Claude Code",
