@@ -11,8 +11,7 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import { Menu, Plus, ChevronLeft, ChevronRight } from "lucide-react";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { getEvents, addEvent, type CalendarEvent } from "@/data/events";
 import {
   Dialog,
