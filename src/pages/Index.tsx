@@ -18,6 +18,9 @@ const Index = () => {
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTools, setAiTools] = useState<string[]>([]);
+  // Pending (staged) filter selections — only applied on "Apply" click
+  const [pendingJobFamilies, setPendingJobFamilies] = useState<string[]>([]);
+  const [pendingAiTools, setPendingAiTools] = useState<string[]>([]);
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
@@ -47,19 +50,17 @@ const Index = () => {
     });
   }, [search, jobFamilies, aiTools]);
 
-  const sorted = useMemo(() => {
-    const copy = [...filtered];
-    if (sort === "Most Recent") copy.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-    if (sort === "Most Viewed") copy.sort((a, b) => b.views - a.views);
-    if (sort === "Most Liked") copy.sort((a, b) => b.likes - a.likes);
-    if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
-    return copy;
-  }, [filtered, sort, likedIds]);
+  const applyFilters = () => {
+    setJobFamilies([...pendingJobFamilies]);
+    setAiTools([...pendingAiTools]);
+  };
 
   const clearFilters = () => {
     setSearch("");
     setJobFamilies([]);
     setAiTools([]);
+    setPendingJobFamilies([]);
+    setPendingAiTools([]);
   };
 
   return (
