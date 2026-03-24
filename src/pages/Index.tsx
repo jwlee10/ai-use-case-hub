@@ -58,18 +58,6 @@ const Index = () => {
     return copy;
   }, [filtered, sort, likedIds]);
 
-  const counts = useMemo(() => {
-    const map: Record<string, number> = {};
-    for (const s of statusTabs) {
-      if (s === "All") {
-        map[s] = allUseCases.length;
-      } else {
-        map[s] = allUseCases.filter((u) => u.status === s).length;
-      }
-    }
-    return map;
-  }, []);
-
   const clearFilters = () => {
     setSearch("");
     setJobFamilies([]);
