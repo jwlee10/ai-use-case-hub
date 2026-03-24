@@ -36,6 +36,7 @@ export const useCases: UseCase[] = [
     description: "Turn procedure text into a step-by-step safety checklist and audit questions.",
     jobFamilies: ["PSE", "Process", "Hardware"],
     impact: "Less time building checklists; improves completeness.",
+    timeSavedPerUse: "1 hr",
     views: 218,
     likes: 32,
     aiToolUsed: "ChatGPT",
