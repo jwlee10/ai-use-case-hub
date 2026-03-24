@@ -45,7 +45,7 @@ const Index = () => {
       if (aiTools.length > 0 && !aiTools.includes(uc.aiToolUsed)) return false;
       return true;
     });
-  }, [search, jobFamilies, aiTools, statusFilter]);
+  }, [search, jobFamilies, aiTools]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
