@@ -1,4 +1,5 @@
-import { BookOpen, Video, FileText, MessageSquare, Clock, Award, Mail, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { BookOpen, Video, FileText, MessageSquare, Clock, Award, Mail, ExternalLink, MapPin, CalendarDays, Plus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
