@@ -24,8 +24,8 @@ export function TopNav() {
   return (
     <nav className="border-b border-border bg-foreground">
       <div className="mx-auto flex max-w-[1280px] items-center px-3">
-        <Link to="/" className="mr-6 font-heading text-lg font-bold text-primary-foreground py-3">
-          AI Hub
+        <Link to="/" className="mr-6 font-heading text-lg font-bold text-primary-foreground py-3 whitespace-nowrap">
+          SPG AI Productivity
         </Link>
         <div className="flex items-center gap-1">
           {sections.map((s) => {
