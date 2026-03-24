@@ -109,30 +109,30 @@ const OfficeHour = () => {
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1280px] px-3 py-5 space-y-6">
+      <main className="mx-auto max-w-3xl px-4 py-6 space-y-8">
         {groupedByWeek.map(([weekOf, weekQuestions]) => (
           <div key={weekOf} className="space-y-3">
-            <h2 className="text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-primary" />
+            <h2 className="text-base font-bold tracking-tight text-foreground flex items-center gap-2 font-heading">
+              <MessageSquare className="h-4 w-4 text-primary" />
               Week of {format(parseISO(weekOf), "MMMM d, yyyy")}
-              <span className="ml-2 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-                {weekQuestions.length} question{weekQuestions.length !== 1 && "s"}
+              <span className="ml-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+                {weekQuestions.length}
               </span>
             </h2>
             <div className="space-y-2">
               {weekQuestions.map((q) => (
                 <div
                   key={q.id}
-                  className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30 cursor-pointer"
+                  className="rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/30 cursor-pointer"
                   onClick={() => setSelectedQuestion(q)}
                 >
                   <p className="text-sm font-body text-foreground leading-relaxed line-clamp-2">
                     {q.question}
                   </p>
-                  <div className="mt-2 flex items-center gap-4 text-xs text-muted-foreground font-ui">
-                    <span>Submitted by {q.submittedBy}</span>
+                  <div className="mt-1.5 flex items-center gap-3 text-xs text-muted-foreground font-ui">
+                    <span>{q.submittedBy}</span>
                     <span>•</span>
-                    <span>{format(parseISO(q.submittedAt), "MMM d, yyyy 'at' h:mm a")}</span>
+                    <span>{format(parseISO(q.submittedAt), "MMM d 'at' h:mm a")}</span>
                     {q.attachmentName && (
                       <>
                         <span>•</span>
