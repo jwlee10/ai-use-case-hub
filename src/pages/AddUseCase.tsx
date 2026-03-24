@@ -202,6 +202,14 @@ const AddUseCase = () => {
                 <option key={m} value={m}>{m}</option>
               ))}
             </select>
+            {aiMethod === "Other" && (
+              <input
+                value={aiMethodOther}
+                onChange={(e) => setAiMethodOther(e.target.value)}
+                placeholder="Please specify..."
+                className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            )}
             {errors.aiMethod && <p className="mt-1 text-xs text-destructive">{errors.aiMethod}</p>}
           </div>
         </section>
