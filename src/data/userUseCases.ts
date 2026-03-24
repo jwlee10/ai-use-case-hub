@@ -17,6 +17,7 @@ let userUseCases: UserUseCase[] = [
     description: "Automatically format raw engineering specs into standardized templates with proper headings, tables, and cross-references.",
     jobFamilies: ["Engineering", "Process"],
     impact: "Saves 2+ hours per spec document; consistent formatting across teams.",
+    timeSavedPerUse: "2 hrs",
     views: 45,
     likes: 6,
     aiToolUsed: "Copilot Web",
