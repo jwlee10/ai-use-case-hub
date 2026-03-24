@@ -6,6 +6,7 @@ export interface UseCase {
   description: string;
   jobFamilies: string[];
   impact: string;
+  timeSavedPerUse: string;
   views: number;
   likes: number;
   aiToolUsed: string;
