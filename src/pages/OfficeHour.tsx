@@ -5,6 +5,8 @@ import * as XLSX from "xlsx";
 import {
   getOfficeHourQuestions,
   addOfficeHourQuestion,
+  updateOfficeHourQuestion,
+  deleteOfficeHourQuestion,
   type OfficeHourQuestion,
 } from "@/data/officeHourQuestions";
 import {
