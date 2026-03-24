@@ -9,7 +9,6 @@ import UseCaseCards from "@/components/UseCaseCards";
 import MultiSelectFilter from "@/components/MultiSelectFilter";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-const statusTabs: (UseCaseStatus | "All")[] = ["All", "Complete", "Work in Progress", "New"];
 const sortOptions = ["Most Recent", "Most Viewed", "Most Liked", "A-Z"] as const;
 
 const Index = () => {
