@@ -92,6 +92,7 @@ export const useCases: UseCase[] = [
     description: "Draft initial RFP responses using historical winning proposals.",
     jobFamilies: ["Sales", "BD"],
     impact: "Faster first drafts; improved win rate.",
+    timeSavedPerUse: "2 hrs",
     views: 98,
     likes: 11,
     aiToolUsed: "ChatGPT",
