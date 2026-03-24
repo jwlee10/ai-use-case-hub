@@ -78,9 +78,6 @@ const Index = () => {
               <p className="mt-1 text-sm text-primary-foreground/70 font-body">
                 Discover proven AI applications across job families—search, filter, and reuse.
               </p>
-              <p className="mt-1 text-sm text-primary-foreground/70 font-body">
-                Discover proven AI applications across job families—search, filter, and reuse.
-              </p>
             </div>
           </div>
           <button
