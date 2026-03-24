@@ -144,7 +144,9 @@ const Index = () => {
               >
                 Clear
               </button>
-              <button className="rounded-md bg-foreground px-4 py-1.5 font-ui text-xs font-semibold text-card transition-opacity hover:opacity-90">
+              <button
+                onClick={applyFilters}
+                className="rounded-md bg-foreground px-4 py-1.5 font-ui text-xs font-semibold text-card transition-opacity hover:opacity-90">
                 Apply
               </button>
             </div>
