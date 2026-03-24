@@ -61,6 +61,7 @@ const AddUseCase = () => {
       description: description.trim(),
       jobFamilies,
       impact: impact.trim(),
+      timeSavedPerUse: "",
       views: 0,
       likes: 0,
       aiToolUsed: aiToolsUsed[0] || "",

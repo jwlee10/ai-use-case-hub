@@ -74,6 +74,9 @@ const UseCaseTable = ({ data, likedIds, onToggleLike }: UseCaseTableProps) => {
                 <td className="px-4 py-3 text-muted-foreground max-w-[200px]">
                   {uc.impact}
                 </td>
+                <td className="px-4 py-3 font-ui text-xs font-semibold text-foreground whitespace-nowrap">
+                  {uc.timeSavedPerUse}
+                </td>
                 <td className="px-4 py-3">
                   <span className="inline-flex items-center gap-1 text-muted-foreground font-ui text-xs">
                     <Eye className="h-3.5 w-3.5" />

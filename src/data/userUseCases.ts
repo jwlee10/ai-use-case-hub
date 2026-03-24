@@ -57,6 +57,7 @@ let userUseCases: UserUseCase[] = [
     description: "Classify incoming customer feedback into themes and sentiment for quarterly review.",
     jobFamilies: ["Sales", "Marketing"],
     impact: "",
+    timeSavedPerUse: "10 min",
     views: 5,
     likes: 0,
     aiToolUsed: "OneLXM",
