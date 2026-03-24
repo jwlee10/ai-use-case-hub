@@ -1,8 +1,7 @@
 import { useState, useMemo } from "react";
 import { format, parseISO } from "date-fns";
-import { Menu, Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock, Download } from "lucide-react";
+import { Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock, Download } from "lucide-react";
 import * as XLSX from "xlsx";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   getOfficeHourQuestions,
   addOfficeHourQuestion,
@@ -66,20 +65,15 @@ const OfficeHour = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-foreground">
+      <header className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-[1280px] items-center justify-between px-3 py-4">
-          <div className="flex items-center gap-3">
-            <SidebarTrigger className="text-primary-foreground hover:bg-primary-foreground/10">
-              <Menu className="h-5 w-5" />
-            </SidebarTrigger>
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">
-                Office Hour
-              </h1>
-              <p className="mt-1 text-sm text-primary-foreground/70 font-body">
-                Submit questions for our weekly AI office hours session.
-              </p>
-            </div>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              Office Hour
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground font-body">
+              Submit questions for our weekly AI office hours session.
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <Button
@@ -99,14 +93,14 @@ const OfficeHour = () => {
                 XLSX.utils.book_append_sheet(wb, ws, "Office Hour Questions");
                 XLSX.writeFile(wb, "office_hour_questions.xlsx");
               }}
-              className="rounded-lg border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 px-4 py-2.5 font-ui text-sm"
+              className="rounded-lg px-4 py-2.5 font-ui text-sm"
             >
               <Download className="mr-1 h-4 w-4" />
               Export
             </Button>
             <Button
               onClick={() => setDialogOpen(true)}
-              className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold"
+              className="rounded-lg px-5 py-2.5 font-ui text-sm font-semibold"
             >
               <Plus className="mr-1 h-4 w-4" />
               Submit a Question

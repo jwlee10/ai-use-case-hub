@@ -11,8 +11,7 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import { Menu, Plus, ChevronLeft, ChevronRight } from "lucide-react";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { getEvents, addEvent, type CalendarEvent } from "@/data/events";
 import {
   Dialog,
@@ -99,24 +98,19 @@ const EventCalendar = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-foreground">
+      <header className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-[1280px] items-center justify-between px-3 py-4">
-          <div className="flex items-center gap-3">
-            <SidebarTrigger className="text-primary-foreground hover:bg-primary-foreground/10">
-              <Menu className="h-5 w-5" />
-            </SidebarTrigger>
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-primary-foreground">
-                Event Calendar
-              </h1>
-              <p className="mt-1 text-sm text-primary-foreground/70 font-body">
-                AI-related events, workshops, and office hours.
-              </p>
-            </div>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              Event Calendar
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground font-body">
+              AI-related events, workshops, and office hours.
+            </p>
           </div>
           <Button
             onClick={() => openAddDialog()}
-            className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold"
+            className="rounded-lg px-5 py-2.5 font-ui text-sm font-semibold"
           >
             <Plus className="mr-1 h-4 w-4" />
             New Event
