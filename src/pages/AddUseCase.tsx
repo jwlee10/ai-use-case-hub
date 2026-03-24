@@ -12,7 +12,7 @@ const JOB_FAMILY_OPTIONS = [
 
 const AI_TOOLS = ["Copilot Web", "Copilot License", "Claude Code", "OneLXM", "Github Copilot", "Copilot Studio", "Copilot Cowork"];
 const FINAL_PRODUCTS = ["Script", "Workflow", "Prompt(s)", "Agent"];
-const AI_METHODS = ["Single prompt", "Vibe Coding", "Iterative prompting", "Copilot feature (no-prompt)"];
+const AI_METHODS = ["Single prompt", "Vibe Coding", "Iterative prompting", "Copilot feature (no-prompt)", "Agent Creation", "Other"];
 const TIME_UNITS = ["seconds", "minutes", "hours"];
 
 const AddUseCase = () => {
@@ -25,6 +25,7 @@ const AddUseCase = () => {
   const [aiToolsUsed, setAiToolsUsed] = useState<string[]>([]);
   const [finalProduct, setFinalProduct] = useState<string[]>([]);
   const [aiMethod, setAiMethod] = useState("");
+  const [aiMethodOther, setAiMethodOther] = useState("");
   const [asIsTime, setAsIsTime] = useState("");
   const [asIsUnit, setAsIsUnit] = useState("minutes");
   const [withAiTime, setWithAiTime] = useState("");
@@ -43,6 +44,7 @@ const AddUseCase = () => {
     if (aiToolsUsed.length === 0) e.aiToolsUsed = "Required";
     if (finalProduct.length === 0) e.finalProduct = "Required";
     if (!aiMethod) e.aiMethod = "Required";
+    if (aiMethod === "Other" && !aiMethodOther.trim()) e.aiMethod = "Please specify";
     if (!impact.trim()) e.impact = "Required";
     if (!asIsTime.trim()) e.asIsTime = "Required";
     if (!withAiTime.trim()) e.withAiTime = "Required";
@@ -67,7 +69,7 @@ const AddUseCase = () => {
       createdAt: new Date().toISOString().split("T")[0],
       aiToolsUsed,
       finalProduct,
-      aiUsageMethod: aiMethod,
+      aiUsageMethod: aiMethod === "Other" ? aiMethodOther.trim() : aiMethod,
       prompt: prompt.trim(),
       microlearningLink: microlearningLink.trim(),
       attachments: attachments.map((f) => f.name),
@@ -200,6 +202,14 @@ const AddUseCase = () => {
                 <option key={m} value={m}>{m}</option>
               ))}
             </select>
+            {aiMethod === "Other" && (
+              <input
+                value={aiMethodOther}
+                onChange={(e) => setAiMethodOther(e.target.value)}
+                placeholder="Please specify..."
+                className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2 font-ui text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            )}
             {errors.aiMethod && <p className="mt-1 text-xs text-destructive">{errors.aiMethod}</p>}
           </div>
         </section>
