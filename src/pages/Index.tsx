@@ -94,7 +94,7 @@ const Index = () => {
         <div className="rounded-lg border border-border bg-card p-5 space-y-4">
           <div className="flex flex-wrap items-end gap-4">
             {/* Search */}
-            <div className="flex-1 min-w-[240px]">
+            <div className="flex-[2] min-w-[240px]">
               <label className="mb-1.5 block font-ui text-xs font-semibold tracking-wider text-muted-foreground">
                 SEARCH
               </label>
