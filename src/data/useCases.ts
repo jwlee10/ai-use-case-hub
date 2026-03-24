@@ -148,6 +148,7 @@ export const useCases: UseCase[] = [
     description: "Auto-categorize expense line items based on description and vendor.",
     jobFamilies: ["Finance"],
     impact: "Reduce misclassification and audit time.",
+    timeSavedPerUse: "25 min",
     views: 12,
     likes: 1,
     aiToolUsed: "ChatGPT",
