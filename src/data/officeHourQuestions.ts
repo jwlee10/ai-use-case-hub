@@ -87,4 +87,12 @@ export const addOfficeHourQuestion = (q: OfficeHourQuestion) => {
   questions = [q, ...questions];
 };
 
+export const updateOfficeHourQuestion = (id: string, updates: Partial<OfficeHourQuestion>) => {
+  questions = questions.map((q) => (q.id === id ? { ...q, ...updates } : q));
+};
+
+export const deleteOfficeHourQuestion = (id: string) => {
+  questions = questions.filter((q) => q.id !== id);
+};
+
 export const getCurrentWeekMonday = () => thisMonday;
