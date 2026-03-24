@@ -120,6 +120,7 @@ export const useCases: UseCase[] = [
     description: "Answer common new-hire questions using internal documentation.",
     jobFamilies: ["HR", "IT"],
     impact: "Reduce HR ticket volume by 30%.",
+    timeSavedPerUse: "15 min",
     views: 64,
     likes: 8,
     aiToolUsed: "ChatGPT",
