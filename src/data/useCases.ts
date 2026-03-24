@@ -64,6 +64,7 @@ export const useCases: UseCase[] = [
     description: "Generate structured knowledge articles from support ticket resolutions.",
     jobFamilies: ["IT", "Support"],
     impact: "Save ~1+ hour per article; consistent formatting.",
+    timeSavedPerUse: "1.5 hrs",
     views: 156,
     likes: 19,
     aiToolUsed: "ChatGPT",
