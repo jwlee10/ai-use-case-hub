@@ -121,14 +121,14 @@ const Index = () => {
 
             <MultiSelectFilter
               label="JOB FAMILY"
-              selected={jobFamilies}
-              onChange={setJobFamilies}
+              selected={pendingJobFamilies}
+              onChange={setPendingJobFamilies}
               options={allJobFamilyOptions}
             />
             <MultiSelectFilter
               label="AI TOOL USED"
-              selected={aiTools}
-              onChange={setAiTools}
+              selected={pendingAiTools}
+              onChange={setPendingAiTools}
               options={allTools}
             />
           </div>
