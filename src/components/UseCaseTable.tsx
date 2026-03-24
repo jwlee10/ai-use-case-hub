@@ -18,7 +18,7 @@ const UseCaseTable = ({ data, likedIds, onToggleLike }: UseCaseTableProps) => {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">
-              {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "VIEWS", "LIKES", "AI TOOL USED"].map(
+              {["", "TITLE", "DESCRIPTION", "JOB FAMILIES", "IMPACT", "TIME SAVED", "VIEWS", "LIKES", "AI TOOL USED"].map(
                 (col) => (
                   <th
                     key={col || "like"}
@@ -73,6 +73,9 @@ const UseCaseTable = ({ data, likedIds, onToggleLike }: UseCaseTableProps) => {
                 </td>
                 <td className="px-4 py-3 text-muted-foreground max-w-[200px]">
                   {uc.impact}
+                </td>
+                <td className="px-4 py-3 font-ui text-xs font-semibold text-foreground whitespace-nowrap">
+                  {uc.timeSavedPerUse}
                 </td>
                 <td className="px-4 py-3">
                   <span className="inline-flex items-center gap-1 text-muted-foreground font-ui text-xs">

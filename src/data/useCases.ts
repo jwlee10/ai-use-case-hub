@@ -6,6 +6,7 @@ export interface UseCase {
   description: string;
   jobFamilies: string[];
   impact: string;
+  timeSavedPerUse: string;
   views: number;
   likes: number;
   aiToolUsed: string;
@@ -21,6 +22,7 @@ export const useCases: UseCase[] = [
     description: "Generate and troubleshoot JMP scripting for common plots and filters.",
     jobFamilies: ["GPM", "Process"],
     impact: "Shortens analysis cycles for repeated reporting.",
+    timeSavedPerUse: "45 min",
     views: 342,
     likes: 47,
     aiToolUsed: "Copilot",
@@ -34,6 +36,7 @@ export const useCases: UseCase[] = [
     description: "Turn procedure text into a step-by-step safety checklist and audit questions.",
     jobFamilies: ["PSE", "Process", "Hardware"],
     impact: "Less time building checklists; improves completeness.",
+    timeSavedPerUse: "1 hr",
     views: 218,
     likes: 32,
     aiToolUsed: "ChatGPT",
@@ -47,6 +50,7 @@ export const useCases: UseCase[] = [
     description: "Summarize delayed parts and generate stakeholder updates with next steps.",
     jobFamilies: ["BU Ops", "TPM", "Sales"],
     impact: "Reduce update prep time; fewer missed follow-ups.",
+    timeSavedPerUse: "30 min",
     views: 189,
     likes: 25,
     aiToolUsed: "Copilot",
@@ -60,6 +64,7 @@ export const useCases: UseCase[] = [
     description: "Generate structured knowledge articles from support ticket resolutions.",
     jobFamilies: ["IT", "Support"],
     impact: "Save ~1+ hour per article; consistent formatting.",
+    timeSavedPerUse: "1.5 hrs",
     views: 156,
     likes: 19,
     aiToolUsed: "ChatGPT",
@@ -73,6 +78,7 @@ export const useCases: UseCase[] = [
     description: "Automatically summarize meeting transcripts into action items and key decisions.",
     jobFamilies: ["All"],
     impact: "Cut meeting follow-up time by 50%.",
+    timeSavedPerUse: "20 min",
     views: 412,
     likes: 58,
     aiToolUsed: "Copilot",
@@ -86,6 +92,7 @@ export const useCases: UseCase[] = [
     description: "Draft initial RFP responses using historical winning proposals.",
     jobFamilies: ["Sales", "BD"],
     impact: "Faster first drafts; improved win rate.",
+    timeSavedPerUse: "2 hrs",
     views: 98,
     likes: 11,
     aiToolUsed: "ChatGPT",
@@ -99,6 +106,7 @@ export const useCases: UseCase[] = [
     description: "Provide automated code review suggestions and best-practice checks.",
     jobFamilies: ["Engineering"],
     impact: "Faster review cycles; consistent feedback quality.",
+    timeSavedPerUse: "35 min",
     views: 275,
     likes: 41,
     aiToolUsed: "Copilot",
@@ -112,6 +120,7 @@ export const useCases: UseCase[] = [
     description: "Answer common new-hire questions using internal documentation.",
     jobFamilies: ["HR", "IT"],
     impact: "Reduce HR ticket volume by 30%.",
+    timeSavedPerUse: "15 min",
     views: 64,
     likes: 8,
     aiToolUsed: "ChatGPT",
@@ -125,6 +134,7 @@ export const useCases: UseCase[] = [
     description: "Monitor and summarize competitor announcements from public sources.",
     jobFamilies: ["Marketing", "BD"],
     impact: "Stay informed without manual web trawling.",
+    timeSavedPerUse: "1 hr",
     views: 31,
     likes: 3,
     aiToolUsed: "Copilot",
@@ -138,6 +148,7 @@ export const useCases: UseCase[] = [
     description: "Auto-categorize expense line items based on description and vendor.",
     jobFamilies: ["Finance"],
     impact: "Reduce misclassification and audit time.",
+    timeSavedPerUse: "25 min",
     views: 12,
     likes: 1,
     aiToolUsed: "ChatGPT",
