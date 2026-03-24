@@ -134,6 +134,7 @@ export const useCases: UseCase[] = [
     description: "Monitor and summarize competitor announcements from public sources.",
     jobFamilies: ["Marketing", "BD"],
     impact: "Stay informed without manual web trawling.",
+    timeSavedPerUse: "1 hr",
     views: 31,
     likes: 3,
     aiToolUsed: "Copilot",
