@@ -1,8 +1,7 @@
 import { useState, useMemo } from "react";
 import { format, parseISO } from "date-fns";
-import { Menu, Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock, Download } from "lucide-react";
+import { Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock, Download } from "lucide-react";
 import * as XLSX from "xlsx";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   getOfficeHourQuestions,
   addOfficeHourQuestion,
