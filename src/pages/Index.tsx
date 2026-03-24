@@ -47,7 +47,7 @@ const Index = () => {
       if (statusFilter !== "All" && uc.status !== statusFilter) return false;
       return true;
     });
-  }, [search, jobFamilies, aiTools, statusFilter, activeTab]);
+  }, [search, jobFamilies, aiTools, statusFilter]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
