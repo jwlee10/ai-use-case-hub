@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { format, parseISO } from "date-fns";
-import { Menu, Plus, Upload, MessageSquare, Paperclip, ChevronDown } from "lucide-react";
+import { Menu, Plus, Upload, MessageSquare, Paperclip, User, Calendar, Clock } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   getOfficeHourQuestions,
@@ -20,10 +20,10 @@ import { Textarea } from "@/components/ui/textarea";
 const OfficeHour = () => {
   const [questions, setQuestions] = useState(getOfficeHourQuestions());
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState<OfficeHourQuestion | null>(null);
   const [newQuestion, setNewQuestion] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const [error, setError] = useState("");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   // Group questions by week
   const groupedByWeek = useMemo(() => {
@@ -32,7 +32,6 @@ const OfficeHour = () => {
       if (!groups[q.weekOf]) groups[q.weekOf] = [];
       groups[q.weekOf].push(q);
     });
-    // Sort weeks descending
     return Object.entries(groups).sort(([a], [b]) => b.localeCompare(a));
   }, [questions]);
 
@@ -102,37 +101,31 @@ const OfficeHour = () => {
               </span>
             </h2>
             <div className="space-y-2">
-              {weekQuestions.map((q) => {
-                const isExpanded = expandedId === q.id;
-                return (
-                  <div
-                    key={q.id}
-                    className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30 cursor-pointer"
-                    onClick={() => setExpandedId(isExpanded ? null : q.id)}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <p className={`text-sm font-body text-foreground leading-relaxed ${isExpanded ? "" : "line-clamp-2"}`}>
-                        {q.question}
-                      </p>
-                      <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 mt-0.5 ${isExpanded ? "rotate-180" : ""}`} />
-                    </div>
-                    <div className={`mt-2 flex items-center gap-4 text-xs text-muted-foreground font-ui ${isExpanded ? "" : ""}`}>
-                      <span>Submitted by {q.submittedBy}</span>
-                      <span>•</span>
-                      <span>{format(parseISO(q.submittedAt), "MMM d, yyyy 'at' h:mm a")}</span>
-                      {q.attachmentName && (
-                        <>
-                          <span>•</span>
-                          <span className="flex items-center gap-1 text-primary">
-                            <Paperclip className="h-3 w-3" />
-                            {q.attachmentName}
-                          </span>
-                        </>
-                      )}
-                    </div>
+              {weekQuestions.map((q) => (
+                <div
+                  key={q.id}
+                  className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30 cursor-pointer"
+                  onClick={() => setSelectedQuestion(q)}
+                >
+                  <p className="text-sm font-body text-foreground leading-relaxed line-clamp-2">
+                    {q.question}
+                  </p>
+                  <div className="mt-2 flex items-center gap-4 text-xs text-muted-foreground font-ui">
+                    <span>Submitted by {q.submittedBy}</span>
+                    <span>•</span>
+                    <span>{format(parseISO(q.submittedAt), "MMM d, yyyy 'at' h:mm a")}</span>
+                    {q.attachmentName && (
+                      <>
+                        <span>•</span>
+                        <span className="flex items-center gap-1 text-primary">
+                          <Paperclip className="h-3 w-3" />
+                          {q.attachmentName}
+                        </span>
+                      </>
+                    )}
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         ))}
@@ -143,6 +136,45 @@ const OfficeHour = () => {
           </div>
         )}
       </main>
+
+      {/* View Question Dialog */}
+      <Dialog open={!!selectedQuestion} onOpenChange={(open) => !open && setSelectedQuestion(null)}>
+        <DialogContent className="sm:max-w-[560px]">
+          {selectedQuestion && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-lg leading-snug">Submitted Question</DialogTitle>
+                <DialogDescription className="sr-only">Question details</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 pt-1">
+                <p className="text-sm font-body text-foreground leading-relaxed whitespace-pre-wrap">
+                  {selectedQuestion.question}
+                </p>
+                <div className="space-y-2 rounded-md bg-muted/50 p-3">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <User className="h-4 w-4" />
+                    <span>Submitted by <span className="font-medium text-foreground">{selectedQuestion.submittedBy}</span></span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Calendar className="h-4 w-4" />
+                    <span>{format(parseISO(selectedQuestion.submittedAt), "MMMM d, yyyy")}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    <span>{format(parseISO(selectedQuestion.submittedAt), "h:mm a")}</span>
+                  </div>
+                  {selectedQuestion.attachmentName && (
+                    <div className="flex items-center gap-2 text-sm text-primary">
+                      <Paperclip className="h-4 w-4" />
+                      <span className="font-medium">{selectedQuestion.attachmentName}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Submit Question Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -195,5 +227,3 @@ const OfficeHour = () => {
     </div>
   );
 };
-
-export default OfficeHour;
