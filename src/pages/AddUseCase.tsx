@@ -12,7 +12,7 @@ const JOB_FAMILY_OPTIONS = [
 
 const AI_TOOLS = ["Copilot Web", "Copilot License", "Claude Code", "OneLXM", "Github Copilot", "Copilot Studio", "Copilot Cowork"];
 const FINAL_PRODUCTS = ["Script", "Workflow", "Prompt(s)", "Agent"];
-const AI_METHODS = ["Single prompt", "Vibe Coding", "Iterative prompting", "Copilot feature (no-prompt)"];
+const AI_METHODS = ["Single prompt", "Vibe Coding", "Iterative prompting", "Copilot feature (no-prompt)", "Agent Creation", "Other"];
 const TIME_UNITS = ["seconds", "minutes", "hours"];
 
 const AddUseCase = () => {
