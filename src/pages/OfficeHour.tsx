@@ -29,6 +29,8 @@ const OfficeHour = () => {
   const [questions, setQuestions] = useState(getOfficeHourQuestions());
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState<OfficeHourQuestion | null>(null);
+  const [editingQuestion, setEditingQuestion] = useState<OfficeHourQuestion | null>(null);
+  const [editText, setEditText] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const [error, setError] = useState("");
