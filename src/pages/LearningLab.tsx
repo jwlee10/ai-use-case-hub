@@ -82,8 +82,8 @@ const LearningLab = () => {
       <main className="mx-auto max-w-[1280px] px-3 py-6 space-y-8">
         {/* Hero Section */}
         <Card className="overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-3">
-            <div className="lg:col-span-2 p-5 space-y-3">
+          <div className="flex flex-col lg:flex-row">
+            <div className="flex-1 p-5 space-y-3">
               <h2 className="text-lg font-bold text-foreground">About SPG AI Learning Lab</h2>
               <p className="text-sm text-muted-foreground font-body leading-relaxed">
                 <span className="font-semibold text-foreground">AI Learning Lab</span> is a hands-on crash course designed to help SPG employees build practical AI skills. This two-session series covers core AI fundamentals and AI-assisted coding, with real examples and guided activities you can immediately apply at work!
@@ -97,7 +97,7 @@ const LearningLab = () => {
                 </p>
               </div>
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block w-64 shrink-0">
               <img
                 src={heroImage}
                 alt="AI Learning Lab workshop session"
