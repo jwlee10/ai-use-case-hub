@@ -227,3 +227,5 @@ const OfficeHour = () => {
     </div>
   );
 };
+
+export default OfficeHour;
