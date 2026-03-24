@@ -18,7 +18,6 @@ const Index = () => {
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTools, setAiTools] = useState<string[]>([]);
-  const [statusFilter, setStatusFilter] = useState("All");
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
@@ -44,10 +43,9 @@ const Index = () => {
       if (jobFamilies.length > 0 && !uc.jobFamilies.some((jf) => jobFamilies.includes(jf)))
         return false;
       if (aiTools.length > 0 && !aiTools.includes(uc.aiToolUsed)) return false;
-      if (statusFilter !== "All" && uc.status !== statusFilter) return false;
       return true;
     });
-  }, [search, jobFamilies, aiTools, statusFilter]);
+  }, [search, jobFamilies, aiTools]);
 
   const sorted = useMemo(() => {
     const copy = [...filtered];
@@ -62,7 +60,6 @@ const Index = () => {
     setSearch("");
     setJobFamilies([]);
     setAiTools([]);
-    setStatusFilter("All");
   };
 
   return (
@@ -97,7 +94,7 @@ const Index = () => {
         <div className="rounded-lg border border-border bg-card p-5 space-y-4">
           <div className="flex flex-wrap items-end gap-4">
             {/* Search */}
-            <div className="flex-1 min-w-[240px]">
+            <div className="flex-[2] min-w-[240px]">
               <label className="mb-1.5 block font-ui text-xs font-semibold tracking-wider text-muted-foreground">
                 SEARCH
               </label>
@@ -123,12 +120,6 @@ const Index = () => {
               selected={aiTools}
               onChange={setAiTools}
               options={allTools}
-            />
-            <SelectFilter
-              label="USE CASE STATUS"
-              value={statusFilter}
-              onChange={setStatusFilter}
-              options={["All", "Complete", "Work in Progress", "New"]}
             />
           </div>
 
