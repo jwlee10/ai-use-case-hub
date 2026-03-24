@@ -23,6 +23,7 @@ const OfficeHour = () => {
   const [newQuestion, setNewQuestion] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const [error, setError] = useState("");
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   // Group questions by week
   const groupedByWeek = useMemo(() => {
