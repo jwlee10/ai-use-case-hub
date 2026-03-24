@@ -22,6 +22,7 @@ export const useCases: UseCase[] = [
     description: "Generate and troubleshoot JMP scripting for common plots and filters.",
     jobFamilies: ["GPM", "Process"],
     impact: "Shortens analysis cycles for repeated reporting.",
+    timeSavedPerUse: "45 min",
     views: 342,
     likes: 47,
     aiToolUsed: "Copilot",
