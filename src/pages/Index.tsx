@@ -50,6 +50,15 @@ const Index = () => {
     });
   }, [search, jobFamilies, aiTools]);
 
+  const sorted = useMemo(() => {
+    const copy = [...filtered];
+    if (sort === "Most Recent") copy.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    if (sort === "Most Viewed") copy.sort((a, b) => b.views - a.views);
+    if (sort === "Most Liked") copy.sort((a, b) => b.likes - a.likes);
+    if (sort === "A-Z") copy.sort((a, b) => a.title.localeCompare(b.title));
+    return copy;
+  }, [filtered, sort, likedIds]);
+
   const applyFilters = () => {
     setJobFamilies([...pendingJobFamilies]);
     setAiTools([...pendingAiTools]);
