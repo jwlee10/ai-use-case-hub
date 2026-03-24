@@ -81,36 +81,33 @@ const LearningLab = () => {
 
       <main className="mx-auto max-w-[1280px] px-3 py-6 space-y-8">
         {/* Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-3 space-y-4">
-            <h2 className="text-xl font-bold text-foreground">About SPG AI Learning Lab</h2>
-            <p className="text-sm text-muted-foreground font-body leading-relaxed">
-              <span className="font-semibold text-foreground">AI Learning Lab</span> is a hands-on crash course designed to help SPG employees build practical AI skills. This two-session series covers core AI fundamentals and AI-assisted coding, with real examples and guided activities you can immediately apply at work!
-            </p>
-
-            <Card className="border-primary/20 bg-primary/5">
-              <CardContent className="p-4">
-                <div className="flex items-start gap-3">
-                  <Award className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                  <div className="text-sm text-muted-foreground font-body leading-relaxed">
-                    By attending these sessions (either in-person or virtually), you will automatically receive{" "}
-                    <span className="font-bold text-foreground">PATHWAY credit (XP)</span> that will be applied toward fulfilling the{" "}
-                    <span className="font-bold text-foreground">mandatory SPG requirement of 4 hours (400XP) of AI training</span>. Each session is 2 hours — completion of one session earns 200XP, and completion of both sessions earns 400XP.
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+        <Card className="overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-3">
+            <div className="lg:col-span-2 p-5 space-y-3">
+              <h2 className="text-lg font-bold text-foreground">About SPG AI Learning Lab</h2>
+              <p className="text-sm text-muted-foreground font-body leading-relaxed">
+                <span className="font-semibold text-foreground">AI Learning Lab</span> is a hands-on crash course designed to help SPG employees build practical AI skills. This two-session series covers core AI fundamentals and AI-assisted coding, with real examples and guided activities you can immediately apply at work!
+              </p>
+              <div className="flex items-start gap-3 rounded-md border border-primary/20 bg-primary/5 p-3">
+                <Award className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                <p className="text-xs text-muted-foreground font-body leading-relaxed">
+                  By attending these sessions (either in-person or virtually), you will automatically receive{" "}
+                  <span className="font-bold text-foreground">PATHWAY credit (XP)</span> that will be applied toward fulfilling the{" "}
+                  <span className="font-bold text-foreground">mandatory SPG requirement of 4 hours (400XP) of AI training</span>. Each session is 2 hours — completion of one session earns 200XP, and completion of both sessions earns 400XP.
+                </p>
+              </div>
+            </div>
+            <div className="hidden lg:block">
+              <img
+                src={heroImage}
+                alt="AI Learning Lab workshop session"
+                className="h-full w-full object-cover"
+                width={1280}
+                height={720}
+              />
+            </div>
           </div>
-          <div className="lg:col-span-2">
-            <img
-              src={heroImage}
-              alt="AI Learning Lab workshop session"
-              className="rounded-lg w-full h-full object-cover shadow-md"
-              width={1280}
-              height={720}
-            />
-          </div>
-        </div>
+        </Card>
 
         {/* Sessions */}
         <div className="space-y-4">
