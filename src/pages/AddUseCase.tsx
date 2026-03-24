@@ -69,7 +69,7 @@ const AddUseCase = () => {
       createdAt: new Date().toISOString().split("T")[0],
       aiToolsUsed,
       finalProduct,
-      aiUsageMethod: aiMethod,
+      aiUsageMethod: aiMethod === "Other" ? aiMethodOther.trim() : aiMethod,
       prompt: prompt.trim(),
       microlearningLink: microlearningLink.trim(),
       attachments: attachments.map((f) => f.name),
