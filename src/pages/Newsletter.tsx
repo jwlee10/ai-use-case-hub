@@ -69,7 +69,7 @@ const Newsletter = () => {
         <div className="mx-auto flex max-w-[1280px] items-center justify-between px-3 py-4">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              Newsletter
+              Newsletters
             </h1>
             <p className="mt-1 text-sm text-muted-foreground font-body">
               Monthly newsletters from the AI team.
