@@ -73,6 +73,19 @@ const OfficeHour = () => {
     setDialogOpen(false);
   };
 
+  const handleDelete = (id: string) => {
+    deleteOfficeHourQuestion(id);
+    setQuestions(getOfficeHourQuestions());
+  };
+
+  const handleEditSave = () => {
+    if (!editingQuestion || !editText.trim()) return;
+    updateOfficeHourQuestion(editingQuestion.id, { question: editText.trim() });
+    setQuestions(getOfficeHourQuestions());
+    setEditingQuestion(null);
+    setEditText("");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
