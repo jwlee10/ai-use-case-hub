@@ -81,13 +81,37 @@ const OfficeHour = () => {
               </p>
             </div>
           </div>
-          <Button
-            onClick={() => setDialogOpen(true)}
-            className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold"
-          >
-            <Plus className="mr-1 h-4 w-4" />
-            Submit a Question
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                const rows = questions.map((q) => ({
+                  "Week Of": format(parseISO(q.weekOf), "MMMM d, yyyy"),
+                  "Question": q.question,
+                  "Submitted By": q.submittedBy,
+                  "Date": format(parseISO(q.submittedAt), "MMM d, yyyy"),
+                  "Time": format(parseISO(q.submittedAt), "h:mm a"),
+                  "Attachment": q.attachmentName || "",
+                }));
+                const ws = XLSX.utils.json_to_sheet(rows);
+                ws["!cols"] = [{ wch: 20 }, { wch: 60 }, { wch: 15 }, { wch: 15 }, { wch: 12 }, { wch: 25 }];
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Office Hour Questions");
+                XLSX.writeFile(wb, "office_hour_questions.xlsx");
+              }}
+              className="rounded-lg border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 px-4 py-2.5 font-ui text-sm"
+            >
+              <Download className="mr-1 h-4 w-4" />
+              Export
+            </Button>
+            <Button
+              onClick={() => setDialogOpen(true)}
+              className="rounded-lg bg-primary px-5 py-2.5 font-ui text-sm font-semibold"
+            >
+              <Plus className="mr-1 h-4 w-4" />
+              Submit a Question
+            </Button>
+          </div>
         </div>
       </header>
 
