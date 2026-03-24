@@ -156,24 +156,6 @@ const Index = () => {
             Use Cases
           </h2>
           <div className="flex items-center gap-6">
-            <div className="flex gap-1">
-              {statusTabs.map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`relative px-3 py-1.5 font-ui text-sm font-medium transition-colors ${
-                    activeTab === tab
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {tab} ({counts[tab]})
-                  {activeTab === tab && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
-                  )}
-                </button>
-              ))}
-            </div>
 
             <div className="flex items-center gap-2">
               <span className="font-ui text-xs font-semibold tracking-wider text-muted-foreground">
