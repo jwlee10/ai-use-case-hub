@@ -18,6 +18,9 @@ const Index = () => {
   const [search, setSearch] = useState("");
   const [jobFamilies, setJobFamilies] = useState<string[]>([]);
   const [aiTools, setAiTools] = useState<string[]>([]);
+  // Pending (staged) filter selections — only applied on "Apply" click
+  const [pendingJobFamilies, setPendingJobFamilies] = useState<string[]>([]);
+  const [pendingAiTools, setPendingAiTools] = useState<string[]>([]);
   const [sort, setSort] = useState<string>("Most Recent");
   const [viewMode, setViewMode] = useState<"list" | "cards">("list");
 
@@ -56,10 +59,17 @@ const Index = () => {
     return copy;
   }, [filtered, sort, likedIds]);
 
+  const applyFilters = () => {
+    setJobFamilies([...pendingJobFamilies]);
+    setAiTools([...pendingAiTools]);
+  };
+
   const clearFilters = () => {
     setSearch("");
     setJobFamilies([]);
     setAiTools([]);
+    setPendingJobFamilies([]);
+    setPendingAiTools([]);
   };
 
   return (
@@ -111,14 +121,14 @@ const Index = () => {
 
             <MultiSelectFilter
               label="JOB FAMILY"
-              selected={jobFamilies}
-              onChange={setJobFamilies}
+              selected={pendingJobFamilies}
+              onChange={setPendingJobFamilies}
               options={allJobFamilyOptions}
             />
             <MultiSelectFilter
               label="AI TOOL USED"
-              selected={aiTools}
-              onChange={setAiTools}
+              selected={pendingAiTools}
+              onChange={setPendingAiTools}
               options={allTools}
             />
           </div>
@@ -134,7 +144,9 @@ const Index = () => {
               >
                 Clear
               </button>
-              <button className="rounded-md bg-foreground px-4 py-1.5 font-ui text-xs font-semibold text-card transition-opacity hover:opacity-90">
+              <button
+                onClick={applyFilters}
+                className="rounded-md bg-foreground px-4 py-1.5 font-ui text-xs font-semibold text-card transition-opacity hover:opacity-90">
                 Apply
               </button>
             </div>
