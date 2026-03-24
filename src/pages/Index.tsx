@@ -121,12 +121,6 @@ const Index = () => {
               onChange={setAiTools}
               options={allTools}
             />
-            <SelectFilter
-              label="USE CASE STATUS"
-              value={statusFilter}
-              onChange={setStatusFilter}
-              options={["All", "Complete", "Work in Progress", "New"]}
-            />
           </div>
 
           <div className="flex items-center justify-between border-t border-border pt-3">
