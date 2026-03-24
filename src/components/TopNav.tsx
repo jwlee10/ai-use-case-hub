@@ -12,7 +12,7 @@ const sections = [
   { label: "Office Hour", url: "/office-hour", icon: MessageCircleQuestion, matchPaths: ["/office-hour"] },
   { label: "Learning Lab", url: "/learning-lab", icon: BookOpen, matchPaths: ["/learning-lab"] },
   { label: "Event Calendar", url: "/event-calendar", icon: CalendarDays, matchPaths: ["/event-calendar"] },
-  { label: "Newsletter", url: "/newsletter", icon: Newspaper, matchPaths: ["/newsletter"] },
+  { label: "Newsletters", url: "/newsletter", icon: Newspaper, matchPaths: ["/newsletter"] },
 ];
 
 export function TopNav() {
