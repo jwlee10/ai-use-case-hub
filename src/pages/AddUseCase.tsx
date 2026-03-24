@@ -238,7 +238,7 @@ const AddUseCase = () => {
           {/* With AI */}
           <div>
             <label className="mb-1 block font-ui text-sm font-semibold text-foreground">
-              With AI
+              With AI <span className="text-destructive">*</span>
             </label>
             <p className="mb-2 text-xs text-muted-foreground">
               How long does this task take now, with AI-enablement?
